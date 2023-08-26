@@ -19,6 +19,7 @@
     "@iconify/react": "^4.1.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.16.0",
+    "ha-component-kit": "^1.0.14",
     "home-assistant-js-websocket": "^8.2.0",
     "javascript-time-ago": "^2.5.9",
     "lodash": "^4.17.21",
