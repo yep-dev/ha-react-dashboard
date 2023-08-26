@@ -31,17 +31,17 @@ export const Sections = <ValueType extends string | number = string>({
   return (
     <Stack gap={4}>
       {items.map((item, i) => {
-        const itemActive = (item.active || active)?.(item)
+        const itemActive = (item.active ?? active)?.(item)
         return (
           <Section
             key={i}
             onClick={() =>
               itemActive
-                ? (item.secondClick || secondClick)?.(item)
-                : (item.onClick || onClick)?.(item)
+                ? (item.secondClick ?? secondClick)?.(item)
+                : (item.onClick ?? onClick)?.(item)
             }
             style={{
-              backgroundColor: itemActive ? colors.light : colors.gray,
+              backgroundColor: itemActive ? colors.light : colors.dark,
             }}
             first={i === 0}
             last={i === items.length - 1}

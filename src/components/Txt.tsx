@@ -1,3 +1,4 @@
+import { colors } from '@constants.ts'
 import styled from '@emotion/styled'
 
 interface Props {
@@ -28,16 +29,7 @@ export const Txt = styled.span<Props>`
         return '400'
     }
   }};
-  color: ${({ color = 'main' }) => {
-    switch (color) {
-      case 'dark':
-        return '#666'
-      case 'darker':
-        return '#333'
-      default:
-        return '#fff'
-    }
-  }};
-  text-align: ${({ textAlign }) => textAlign || 'center'};
+  color: ${colors.white};
+  text-align: ${({ textAlign }) => textAlign ?? 'center'};
   text-wrap: nowrap;
 `

@@ -7,7 +7,7 @@ interface CardProps {
 }
 
 export const Card = styled(Stack)<CardProps>`
-  background-color: ${({ transparent }) => (transparent ? 'transparent' : colors.gray)};
+  background-color: ${({ transparent }) => (transparent ? 'transparent' : colors.dark)};
   padding: 6px;
   border-radius: 8px;
 `

@@ -19,6 +19,10 @@ export const categoryColors = {
 
 export const colors = {
   black: '#000',
-  gray: '#202020',
-  light: '#3F4756',
+  white: '#fff',
+  dark: '#202020',
+  light: categoryColors.idling,
+  green: categoryColors.research,
+  orange: categoryColors.food,
+  red: categoryColors.sleep,
 }
