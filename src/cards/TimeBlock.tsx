@@ -7,6 +7,9 @@ import { textToCamel } from '@utils'
 export const TimeBlock = () => {
   const marvin = useEntity('calendar.marvin')
   const time = useEntity('sensor.time')
+
+  if (marvin.state === 'off') return <Card>no event</Card>
+
   const startTime = format(new Date(marvin.attributes.start_time), 'HH:mm')
   const endTime = format(new Date(marvin.attributes.end_time), 'HH:mm')
 

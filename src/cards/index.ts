@@ -4,4 +4,5 @@
 
 export * from './AirConditioner'
 export * from './DateTime'
+export * from './Sensors'
 export * from './TimeBlock'

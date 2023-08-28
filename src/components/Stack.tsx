@@ -11,7 +11,7 @@ type Props = {
 
 export const Stack: FC<Props> = styled.div<Props>`
   display: flex;
-  gap: ${({ gap = 10 }) => gap}px;
+  gap: ${({ gap = 8 }) => gap}px;
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   justify-content: ${({ align = 'center' }) => align};
   align-items: ${({ alignItems = 'auto' }) => alignItems};

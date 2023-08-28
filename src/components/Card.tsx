@@ -1,6 +1,6 @@
 import { colors } from '@constants'
 import styled from '@emotion/styled'
-import { Stack } from '@components'
+import { Stack } from '@components/Stack.tsx'
 
 interface CardProps {
   transparent?: boolean
