@@ -1,12 +1,18 @@
 import { Mobile } from '@screens'
-import { HassConnect } from '@hakit/core'
+import { useEntity } from '@hakit/core'
+import { useEffect } from 'react'
 
 const App = () => {
-  return (
-    <HassConnect hassUrl={(import.meta.env.VITE_HA_URL as string | undefined) ?? ''}>
-      <Mobile />
-    </HassConnect>
-  )
+  const refreshTrigger = useEntity('input_datetime.trigger_dashboard_reload').state
+
+  useEffect(() => {
+    if (refreshTrigger !== localStorage.getItem('refreshTrigger')) {
+      localStorage.setItem('refreshTrigger', refreshTrigger)
+      window.location.reload()
+    }
+  }, [refreshTrigger])
+
+  return <Mobile />
 }
 
 export default App

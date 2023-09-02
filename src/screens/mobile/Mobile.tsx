@@ -3,18 +3,28 @@ import styled from '@emotion/styled'
 import { AirConditioner, DateTime, Sensors, TimeBlock } from '@cards'
 
 const MainColumn = styled(Stack)`
-  flex: 1;
-  min-width: 406px;
+  min-width: 417px;
+  max-width: 417px;
+  min-height: 540px;
+  border-bottom: 1px solid white;
+
+  & > div {
+    flex: none;
+  }
 `
 
-interface Props {
-  tablet?: boolean
-}
-
-export const Mobile = ({ tablet = false }: Props) => {
+export const Mobile = () => {
   return (
-    <Stack gap={12} align="flex-start" style={{ flexWrap: tablet ? 'wrap' : 'inherit' }}>
-      <MainColumn column>
+    // setup for 1260x540 px (200% scaling of super light – to attach to the arm – xperia 10 V phone)
+    <Stack
+      gap={'0 10px'}
+      align="space-around"
+      alignItems="flex-start"
+      wrap="wrap"
+      style={{ height: 540 }}
+      stretch={false}
+    >
+      <MainColumn column align="flex-start">
         <DateTime />
         <TimeBlock />
         <AirConditioner />
@@ -22,8 +32,9 @@ export const Mobile = ({ tablet = false }: Props) => {
           <Sensors />
         </Stack>
       </MainColumn>
-      <MainColumn>asd</MainColumn>
-      <MainColumn>asd</MainColumn>
+      <MainColumn>qwe</MainColumn>
+      <MainColumn style={{ minHeight: 500 }}>asd</MainColumn>
+      <MainColumn style={{ minHeight: 520 }}>asd</MainColumn>
     </Stack>
   )
 }

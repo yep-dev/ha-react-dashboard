@@ -11,7 +11,8 @@
     "barrels": "barrelsby -DS -c barrels.json && npm run lint",
     "sync": "hakit-sync-types --token $HA_TOKEN --url $HA_URL",
     "types": "./node_modules/.bin/ts-node --esm sync-types.ts",
-    "deploy": "npm run build && ssh ${HA_SERVER} 'rm -rf /root/config/www/dashboard/*' && scp -r ~/projects/ha-react-dashboard/dist/* ${HA_SERVER}:/root/config/www/dashboard/"
+    "deploy": "npm run build && ssh ${HA_SERVER} 'rm -rf /root/config/www/dashboard/*' && scp -r ~/projects/ha-react-dashboard/dist/* ${HA_SERVER}:/root/config/www/dashboard/ && npm run reload-deployed",
+    "reload-deployed": "./node_modules/.bin/ts-node --esm ./reload-deployed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -24,6 +25,7 @@
     "home-assistant-js-websocket": "^8.2.0",
     "javascript-time-ago": "^2.5.9",
     "lodash": "^4.17.21",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-use": "^17.4.0",

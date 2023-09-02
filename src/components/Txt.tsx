@@ -1,4 +1,4 @@
-import { colors } from '@constants.ts'
+import { colors } from '@constants'
 import styled from '@emotion/styled'
 
 interface Props {
