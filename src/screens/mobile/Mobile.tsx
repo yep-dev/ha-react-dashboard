@@ -6,7 +6,6 @@ const MainColumn = styled(Stack)`
   min-width: 417px;
   max-width: 417px;
   min-height: 540px;
-  border-bottom: 1px solid white;
 
   & > div {
     flex: none;
@@ -33,8 +32,8 @@ export const Mobile = () => {
         </Stack>
       </MainColumn>
       <MainColumn>qwe</MainColumn>
-      <MainColumn style={{ minHeight: 500 }}>asd</MainColumn>
-      <MainColumn style={{ minHeight: 520 }}>asd</MainColumn>
+      <MainColumn style={{ minHeight: 514 }}>asd</MainColumn>
+      <MainColumn style={{ minHeight: 514 }}>asd</MainColumn>
     </Stack>
   )
 }

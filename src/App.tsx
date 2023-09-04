@@ -8,7 +8,9 @@ const App = () => {
   useEffect(() => {
     if (refreshTrigger !== localStorage.getItem('refreshTrigger')) {
       localStorage.setItem('refreshTrigger', refreshTrigger)
-      window.location.reload()
+      setTimeout(() => {
+        window.location.reload()
+      }, 5000)
     }
   }, [refreshTrigger])
 

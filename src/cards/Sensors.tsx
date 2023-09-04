@@ -4,7 +4,9 @@ import { useEntity } from '@hakit/core'
 export const Sensors = () => {
   const co2 = useEntity('sensor.co2')
   const xperiaBattery = useEntity('sensor.xperia_battery_level')
+  const xperiaCharging = useEntity('sensor.xperia_battery_state')
   const tabBattery = useEntity('sensor.tab_battery_level')
+  const tabCharging = useEntity('sensor.tab_battery_state')
 
   return (
     <Stack gap={6}>
@@ -20,17 +22,17 @@ export const Sensors = () => {
         icon="ic:baseline-smartphone"
         suffix="%"
         value={Number(xperiaBattery.state)}
-        green={80}
-        orange={20}
-        red={10}
+        green={xperiaCharging.state === 'charging' ? 80 : undefined}
+        orange={xperiaCharging.state === 'charging' ? undefined : 20}
+        red={xperiaCharging.state === 'charging' ? undefined : 10}
       />
       <InfoCard
         icon="ic:baseline-tablet"
         suffix="%"
         value={Number(tabBattery.state)}
-        green={80}
-        orange={20}
-        red={10}
+        green={tabCharging.state === 'charging' ? 80 : undefined}
+        orange={tabCharging.state === 'charging' ? undefined : 20}
+        red={tabCharging.state === 'charging' ? undefined : 10}
       />
     </Stack>
   )

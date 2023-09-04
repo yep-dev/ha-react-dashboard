@@ -12,32 +12,33 @@ interface Props {
   icon: string
   suffix?: string
   value: number
-  green: number
-  orange: number
-  red: number
+  green?: number
+  orange?: number
+  red?: number
   invert?: boolean
 }
 
 const getColor = (
   value: number,
-  green: number,
-  orange: number,
-  red: number,
+  green?: number,
+  orange?: number,
+  red?: number,
   invert?: boolean,
 ): string => {
-  if (value === green) return colors.green
-  if (value === orange) return colors.orange
-  if (value === red) return colors.red
+  if (green !== undefined && value === green) return colors.green
+  if (orange !== undefined && value === orange) return colors.orange
+  if (red !== undefined && value === red) return colors.red
 
   if (invert) {
-    if (value < green) return colors.green
-    if (value > red) return colors.red
-    if (value > orange) return colors.orange
+    if (green !== undefined && value < green) return colors.green
+    if (red !== undefined && value > red) return colors.red
+    if (orange !== undefined && value > orange) return colors.orange
   } else {
-    if (value > green) return colors.green
-    if (value < red) return colors.red
-    if (value < orange) return colors.orange
+    if (green !== undefined && value > green) return colors.green
+    if (red !== undefined && value < red) return colors.red
+    if (orange !== undefined && value < orange) return colors.orange
   }
+
   return colors.dark
 }
 
