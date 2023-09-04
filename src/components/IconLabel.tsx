@@ -1,7 +1,7 @@
 import { Icon } from '@iconify/react'
 import { Card } from '@components'
 
-interface Props {
+type Props = {
   icon: string
   text?: string
   onClick?(): void

@@ -8,7 +8,7 @@ export const Container = styled(Card)<{ background: string }>`
   padding: 4px;
 `
 
-interface Props {
+type Props = {
   icon: string
   suffix?: string
   value: number

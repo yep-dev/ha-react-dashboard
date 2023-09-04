@@ -5,6 +5,5 @@
 export * from './Card'
 export * from './IconLabel'
 export * from './InfoCard'
-export * from './Sections'
 export * from './Stack'
 export * from './Txt'

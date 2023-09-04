@@ -1,5 +1,5 @@
 import { useEntity } from '@hakit/core'
-import { IconLabel, Sections, Stack } from '@components'
+import { Card, IconLabel, Stack } from '@components'
 
 export const AirConditioner = () => {
   const ac = useEntity('climate.room_air_conditioner')
@@ -26,54 +26,63 @@ export const AirConditioner = () => {
     <Stack gap={0}>
       <IconLabel onClick={turnOff} icon="ic:round-ac-unit" text="AC" />
       <Stack column gap={4}>
-        <Sections<number>
-          items={[{ value: 22 }, { value: 23 }, { value: 24 }, { value: 25 }]}
-          onClick={({ value }) => {
-            setTemperature(value)
-          }}
-          active={({ value }) => value === ac.attributes.temperature}
-        />
-        <Sections
-          items={[
-            {
-              value: 'Quiet',
-              onClick: () => {
-                setPresetMode('quiet')
-              },
-              active: () => ac.state === 'cool' && ac.attributes.preset_mode === 'quiet',
-            },
-            {
-              value: 'Low',
-              onClick: () => {
-                setPresetMode('off')
-                setFanMode('low')
-              },
-              active: () =>
-                ac.state === 'cool' &&
-                ac.attributes.preset_mode === 'off' &&
-                ac.attributes.fan_mode === 'low',
-            },
-            {
-              value: 'Auto',
-              onClick: () => {
-                setPresetMode('off')
-                setFanMode('auto')
-              },
-              active: () =>
-                ac.state === 'cool' &&
-                ac.attributes.preset_mode === 'off' &&
-                ac.attributes.fan_mode === 'auto',
-            },
-            {
-              value: 'Turbo',
-              onClick: () => {
-                setPresetMode('speed')
-              },
-              active: () => ac.state === 'cool' && ac.attributes.preset_mode === 'speed',
-            },
-          ]}
-          secondClick={turnOff}
-        />
+        <Stack gap={4} radius>
+          {[22, 23, 24, 25].map((temperature) => (
+            <Card
+              onClick={() => {
+                setTemperature(temperature)
+              }}
+              key={temperature}
+              active={ac.attributes.temperature === temperature}
+            >
+              {temperature}
+            </Card>
+          ))}
+        </Stack>
+        <Stack gap={4} radius>
+          <Card
+            onClick={() => {
+              setPresetMode('quiet')
+            }}
+            active={ac.state === 'cool' && ac.attributes.preset_mode === 'quiet'}
+          >
+            Quiet
+          </Card>
+          <Card
+            onClick={() => {
+              setPresetMode('off')
+              setFanMode('low')
+            }}
+            active={
+              ac.state === 'cool' &&
+              ac.attributes.preset_mode === 'off' &&
+              ac.attributes.fan_mode === 'low'
+            }
+          >
+            Low
+          </Card>
+          <Card
+            onClick={() => {
+              setPresetMode('off')
+              setFanMode('auto')
+            }}
+            active={
+              ac.state === 'cool' &&
+              ac.attributes.preset_mode === 'off' &&
+              ac.attributes.fan_mode === 'auto'
+            }
+          >
+            Auto
+          </Card>
+          <Card
+            onClick={() => {
+              setPresetMode('speed')
+            }}
+            active={ac.state === 'cool' && ac.attributes.preset_mode === 'speed'}
+          >
+            Turbo
+          </Card>
+        </Stack>
       </Stack>
     </Stack>
   )

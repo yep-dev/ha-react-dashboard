@@ -1,7 +1,7 @@
 import { colors } from '@constants'
 import styled from '@emotion/styled'
 
-interface Props {
+type Props = {
   size?: 'sm' | 'md' | 'lg'
   weight?: 'light' | 'normal' | 'bold'
   color?: 'main' | 'dark' | 'darker'

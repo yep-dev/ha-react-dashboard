@@ -36,6 +36,7 @@ module.exports = {
     ],
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/no-unsafe-assignment": 1,
-    "@typescript-eslint/no-unsafe-argument": 1
+    "@typescript-eslint/no-unsafe-argument": 1,
+    "@typescript-eslint/consistent-type-definitions": [1, "type"]
   },
 }
