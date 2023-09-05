@@ -25,8 +25,8 @@ export const AirConditioner = () => {
   return (
     <Stack gap={0}>
       <IconLabel onClick={turnOff} icon="ic:round-ac-unit" text="AC" />
-      <Stack column gap={4}>
-        <Stack gap={4} radius>
+      <Stack column>
+        <Stack radius>
           {[22, 23, 24, 25].map((temperature) => (
             <Card
               onClick={() => {
@@ -39,7 +39,7 @@ export const AirConditioner = () => {
             </Card>
           ))}
         </Stack>
-        <Stack gap={4} radius>
+        <Stack radius>
           <Card
             onClick={() => {
               setPresetMode('quiet')

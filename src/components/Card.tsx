@@ -1,6 +1,7 @@
 import { Stack, StackContext, StackProps } from '@components/Stack.tsx'
 import { colors } from '@constants'
 import styled from '@emotion/styled'
+import { Icon } from '@iconify/react'
 import { useContext } from 'react'
 
 type CardProps = {
@@ -41,3 +42,11 @@ export const Card = ({ active, onClick, secondClick, children, ...rest }: CardPr
     </StyledCard>
   )
 }
+
+const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
+  <Card {...props}>
+    <Icon icon={icon} height={24} />
+  </Card>
+)
+
+Card.Icon = CardIcon

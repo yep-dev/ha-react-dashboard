@@ -17,12 +17,12 @@ const StyledStack: FC<StackProps> = styled('div', {
     !['radius', 'column', 'stretch', 'alignItems', 'transparent'].includes(prop),
 })<StackProps>`
   display: flex;
-  gap: ${({ gap = 8 }) => gap}px;
+  gap: ${({ gap = 4 }) => gap}px;
   flex-direction: ${({ column }) => (column ? 'column' : 'row')};
   justify-content: ${({ align = 'center' }) => align};
   align-items: ${({ alignItems = 'auto' }) => alignItems};
   flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
-  border-radius: ${({ radius }) => (radius ? (typeof radius === 'number' ? radius : 8) : 0)}px;
+  border-radius: ${({ radius }) => (radius ? (typeof radius === 'number' ? radius : 10) : 0)}px;
   overflow: hidden;
 
   & > div {

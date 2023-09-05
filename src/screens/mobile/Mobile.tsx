@@ -1,6 +1,6 @@
 import { Stack } from '@components'
 import styled from '@emotion/styled'
-import { AirConditioner, DateTime, Sensors, TimeBlock } from '@cards'
+import { AirConditioner, DateTime, Player, Sensors, TimeBlock } from '@cards'
 
 const MainColumn = styled(Stack)`
   min-width: 417px;
@@ -11,6 +11,12 @@ const MainColumn = styled(Stack)`
     flex: none;
   }
 `
+
+MainColumn.defaultProps = {
+  column: true,
+  align: 'flex-start',
+  gap: 8,
+}
 
 export const Mobile = () => {
   return (
@@ -23,7 +29,7 @@ export const Mobile = () => {
       style={{ height: 540 }}
       stretch={false}
     >
-      <MainColumn column align="flex-start">
+      <MainColumn>
         <DateTime />
         <TimeBlock />
         <AirConditioner />
@@ -31,7 +37,9 @@ export const Mobile = () => {
           <Sensors />
         </Stack>
       </MainColumn>
-      <MainColumn>qwe</MainColumn>
+      <MainColumn>
+        <Player />
+      </MainColumn>
       <MainColumn style={{ minHeight: 514 }}>asd</MainColumn>
       <MainColumn style={{ minHeight: 514 }}>asd</MainColumn>
     </Stack>
