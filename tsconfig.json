@@ -28,8 +28,9 @@
     "noFallthroughCasesInSwitch": true
   },
   "include": [
-    "supported-types.d.ts",
-    "src",
     "sync-types.ts",
+    "supported-types.d.ts",
+    "../ha-component-kit/packages/core/src/types/index.d.ts",
+    "src",
   ],
 }
