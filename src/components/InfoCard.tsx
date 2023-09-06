@@ -1,11 +1,9 @@
 import { colors } from '@constants'
 import styled from '@emotion/styled'
-import { Card } from '@components'
-import { Icon } from '@iconify/react'
+import { Card, Icon } from '@components'
 
 export const Container = styled(Card)<{ background: string }>`
   background-color: ${({ background }) => background};
-  padding: 4px;
 `
 
 type Props = {
@@ -46,8 +44,8 @@ export const InfoCard = ({ icon, suffix, value, green, orange, red, invert }: Pr
   const background = getColor(value, green, orange, red, invert)
 
   return (
-    <Container gap={0} column background={background} alignItems="center">
-      <Icon icon={icon} height={24} />
+    <Container gap={0} background={background} alignItems="center" align="center">
+      <Icon name={icon} style={{ marginLeft: 4 }} />
       <div>
         {value}
         {suffix}

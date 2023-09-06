@@ -24,7 +24,7 @@ export const AirConditioner = () => {
 
   return (
     <Stack gap={0}>
-      <IconLabel onClick={turnOff} icon="ic:round-ac-unit" text="AC" />
+      <IconLabel onClick={turnOff} icon="temperature-snowflake-1" text="AC" />
       <Stack column>
         <Stack radius>
           {[22, 23, 24, 25].map((temperature) => (

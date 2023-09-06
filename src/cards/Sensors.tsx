@@ -11,7 +11,7 @@ export const Sensors = () => {
   return (
     <Stack gap={6}>
       <InfoCard
-        icon="ic:baseline-co2"
+        icon="pollution-co2"
         value={Number(co2.state)}
         green={440}
         orange={800}
@@ -19,7 +19,7 @@ export const Sensors = () => {
         invert
       />
       <InfoCard
-        icon="ic:baseline-smartphone"
+        icon="mobile-phone-2"
         suffix="%"
         value={Number(xperiaBattery.state)}
         green={xperiaCharging.state === 'charging' ? 80 : undefined}
@@ -27,7 +27,7 @@ export const Sensors = () => {
         red={xperiaCharging.state === 'charging' ? undefined : 10}
       />
       <InfoCard
-        icon="ic:baseline-tablet"
+        icon="tablet-1"
         suffix="%"
         value={Number(tabBattery.state)}
         green={tabCharging.state === 'charging' ? 80 : undefined}

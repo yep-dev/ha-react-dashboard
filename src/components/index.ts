@@ -3,6 +3,7 @@
  */
 
 export * from './Card'
+export * from './Icon'
 export * from './IconLabel'
 export * from './InfoCard'
 export * from './Stack'

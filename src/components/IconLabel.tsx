@@ -1,5 +1,4 @@
-import { Icon } from '@iconify/react'
-import { Card } from '@components'
+import { Card, Icon } from '@components'
 
 type Props = {
   icon: string
@@ -11,12 +10,11 @@ export const IconLabel = ({ icon, onClick }: Props) => {
     <Card
       transparent
       gap={0}
-      column
       align="center"
       onClick={onClick}
       style={{ alignItems: 'center', flex: 'none' }}
     >
-      <Icon icon={icon} height={24} />
+      <Icon name={icon} />
       {/*{text && <Txt size="sm">{text}</Txt>}*/}
     </Card>
   )

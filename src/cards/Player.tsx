@@ -10,12 +10,12 @@ export const Player = () => {
       <Card>Title</Card>
       <Stack>
         <Card.Icon
-          icon="ic:baseline-play-arrow"
+          icon="controls-play"
           onClick={() => {
             api.mediaPlayPause()
           }}
         />
-        <Card>asd</Card>
+        <Card.Icon icon="controls-previous">asd</Card.Icon>
         <Card>asd</Card>
         <Card>asd</Card>
       </Stack>
