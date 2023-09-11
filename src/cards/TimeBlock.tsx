@@ -9,7 +9,7 @@ export const TimeBlock = () => {
   const time = useEntity('sensor.time')
 
   const cardProps = {
-    alignItems: 'baseline',
+    alignItems: 'center',
     align: 'space-around',
     size: 'sm',
   } as const
