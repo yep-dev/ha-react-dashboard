@@ -9,16 +9,32 @@ type CardProps = {
   active?: boolean
   transparent?: boolean
   secondClick?(): void
+  size?: 'sm' | 'md' | 'lg' | 'inherit'
+  beta?: boolean
 } & StackProps
 
-const StyledCard = styled(Stack)<CardProps>`
+const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
   background-color: ${({ active, transparent }) =>
     transparent ? 'transparent' : active ? colors.light : colors.dark};
-  padding: 6px;
   cursor: pointer;
+  border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
+  opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
+  min-width: 40px;
 `
 
-export const Card = ({ active, onClick, secondClick, children, ...rest }: CardProps) => {
+StyledCard.defaultProps = {
+  alignItems: 'center',
+}
+
+export const Card = ({
+  active,
+  onClick,
+  secondClick,
+  children,
+  size,
+  style,
+  ...rest
+}: CardProps) => {
   const disableRadius = useContext(StackContext)
 
   const handleClick = () => {
@@ -29,13 +45,14 @@ export const Card = ({ active, onClick, secondClick, children, ...rest }: CardPr
     }
   }
 
+  const height = size === 'inherit' ? 'inherit' : size === 'sm' ? 40 : size === 'lg' ? 60 : 50
+
   return (
     <StyledCard
       onClick={handleClick}
-      style={{
-        backgroundColor: active ? colors.light : colors.dark,
-        borderRadius: disableRadius ? 0 : 8,
-      }}
+      disableRadius={disableRadius}
+      active={active}
+      style={{ minHeight: height, maxHeight: height, ...style }}
       {...rest}
     >
       {children}

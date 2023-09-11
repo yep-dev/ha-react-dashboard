@@ -44,7 +44,7 @@ export const InfoCard = ({ icon, suffix, value, green, orange, red, invert }: Pr
   const background = getColor(value, green, orange, red, invert)
 
   return (
-    <Container gap={0} background={background} alignItems="center" align="center">
+    <Container gap={0} background={background} alignItems="center" align="center" size="sm">
       <Icon name={icon} style={{ marginLeft: 4 }} />
       <div>
         {value}

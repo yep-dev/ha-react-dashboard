@@ -16,7 +16,7 @@ export const Txt = styled.span<Props>`
       case 'lg':
         return '28px'
       default:
-        return '20px'
+        return '18px'
     }
   }};
   font-weight: ${({ weight = 'normal' }) => {

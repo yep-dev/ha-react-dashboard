@@ -14,7 +14,16 @@ export type StackProps = {
 
 const StyledStack: FC<StackProps> = styled('div', {
   shouldForwardProp: (prop) =>
-    !['radius', 'column', 'stretch', 'alignItems', 'transparent'].includes(prop),
+    ![
+      'radius',
+      'column',
+      'stretch',
+      'alignItems',
+      'transparent',
+      'disableRadius',
+      'beta',
+      'active',
+    ].includes(prop),
 })<StackProps>`
   display: flex;
   gap: ${({ gap = 4 }) => gap}px;

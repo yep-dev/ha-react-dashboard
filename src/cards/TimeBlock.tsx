@@ -8,7 +8,12 @@ export const TimeBlock = () => {
   const marvin = useEntity('calendar.marvin')
   const time = useEntity('sensor.time')
 
-  if (marvin.state === 'off') return <Card>no event</Card>
+  const cardProps = {
+    alignItems: 'baseline',
+    align: 'space-around',
+    size: 'sm',
+  } as const
+  if (marvin.state === 'off') return <Card {...cardProps}>no event</Card>
 
   const startTime = format(new Date(marvin.attributes.start_time), 'HH:mm')
   const endTime = format(new Date(marvin.attributes.end_time), 'HH:mm')
@@ -23,11 +28,7 @@ export const TimeBlock = () => {
   const category = textToCamel(slot) as ICategory
 
   return (
-    <Card
-      alignItems="baseline"
-      align="space-around"
-      style={{ backgroundColor: categoryColors[category] }}
-    >
+    <Card style={{ backgroundColor: categoryColors[category] }} {...cardProps}>
       <Txt weight="bold">{slot}</Txt>
       <Txt>
         {startTime} - {endTime}
