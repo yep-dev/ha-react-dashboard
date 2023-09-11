@@ -4,7 +4,7 @@ Built with [@hakit/core](https://github.com/shannonhochkins/ha-component-kit)
 
 Familiarity with React and HA is required to use it effectively
 
-![demo](https://raw.githubusercontent.comhttps://github.com/yep-dev/ha-react-dashboard/master/docs/demo.png)
+![demo](https://raw.githubusercontent.com/yep-dev/ha-react-dashboard/master/docs/demo.png)
 
 Includes:
 - base components I used as a building blocks for the UI, that you can reuse as well
