@@ -5,7 +5,7 @@ import { categoryColors, ICategory } from '@constants'
 import { textToCamel } from '@utils'
 
 export const TimeBlock = () => {
-  const marvin = useEntity('calendar.marvin')
+  const marvin = useEntity('calendar.slots')
   const time = useEntity('sensor.time')
 
   const cardProps = {
@@ -15,16 +15,16 @@ export const TimeBlock = () => {
   } as const
   if (marvin.state === 'off') return <Card {...cardProps}>no event</Card>
 
-  const startTime = format(new Date(marvin.attributes.start_time), 'HH:mm')
-  const endTime = format(new Date(marvin.attributes.end_time), 'HH:mm')
+  const startTime = format(new Date(marvin.attributes.start_time as string), 'HH:mm')
+  const endTime = format(new Date(marvin.attributes.end_time as string), 'HH:mm')
 
   const now = parse(time.state, 'HH:mm', new Date())
-  const endDateTime = new Date(marvin.attributes.end_time)
+  const endDateTime = new Date(marvin.attributes.end_time as string)
   const diff = differenceInMinutes(endDateTime, now)
 
   const hoursLeft = Math.floor(diff / 60)
   const minutesLeft = diff % 60
-  const slot = marvin.attributes.message
+  const slot = marvin.attributes.message as string
   const category = textToCamel(slot) as ICategory
 
   return (

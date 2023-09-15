@@ -40,6 +40,7 @@ module.exports = {
     "@typescript-eslint/no-unsafe-argument": 1,
     "@typescript-eslint/consistent-type-definitions": [1, "type"],
     "@typescript-eslint/no-unused-vars": 1,
-    "react/no-unknown-property": ['error', { ignore: ['css'] }]
+    "react/no-unknown-property": ['error', { ignore: ['css'] }],
+    "@typescript-eslint/no-unsafe-enum-comparison": 0, // temporary
   },
 }

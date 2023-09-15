@@ -19,7 +19,7 @@ const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
   cursor: pointer;
   border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
   opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
-  min-width: 40px;
+  padding: 0 6px;
 `
 
 StyledCard.defaultProps = {

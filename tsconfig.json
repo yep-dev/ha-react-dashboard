@@ -30,8 +30,8 @@
   },
   "include": [
     "sync-types.ts",
+    "./node_modules/@hakit/core/dist/types/index.d.ts",
     "supported-types.d.ts",
-    "../ha-component-kit/packages/core/src/types/index.d.ts",
     "src",
   ],
 }
