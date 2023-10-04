@@ -7,15 +7,14 @@ import { useContext } from 'react'
 type CardProps = {
   onClick?: () => void
   active?: boolean
-  transparent?: boolean
+  color?: string
   secondClick?(): void
-  size?: 'sm' | 'md' | 'lg' | 'inherit'
+  size?: 'sm' | 'md' | 'lg' | 'stretch' | 'inherit'
   beta?: boolean
 } & StackProps
 
 const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
-  background-color: ${({ active, transparent }) =>
-    transparent ? 'transparent' : active ? colors.light : colors.dark};
+  background-color: ${({ active, color }) => (color ? color : active ? colors.light : colors.dark)};
   cursor: pointer;
   border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
   opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
@@ -45,7 +44,14 @@ export const Card = ({
     }
   }
 
-  const height = size === 'inherit' ? 'inherit' : size === 'sm' ? 40 : size === 'lg' ? 60 : 50
+  const sizeToHeightMap = {
+    stretch: '100%',
+    inherit: 'inherit',
+    sm: 40,
+    md: 50,
+    lg: 60,
+  }
+  const height = sizeToHeightMap[size ?? 'md']
 
   return (
     <StyledCard

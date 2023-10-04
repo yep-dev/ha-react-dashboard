@@ -1,8 +1,8 @@
 import { useEntity } from '@hakit/core'
 import { Card, Txt } from '@components'
 import { differenceInMinutes, format, parse } from 'date-fns'
-import { categoryColors, ICategory } from '@constants'
-import { textToCamel } from '@utils'
+import { categoryColors, ICategory } from '@constants.ts'
+import { textToCamel } from '@utils.ts'
 
 export const TimeBlock = () => {
   const marvin = useEntity('calendar.slots')

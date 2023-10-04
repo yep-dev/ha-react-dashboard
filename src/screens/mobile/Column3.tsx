@@ -1,13 +1,16 @@
 import { MainColumn } from '@components'
 import styled from '@emotion/styled'
+import { CurrentProject } from '@screens'
 
 const Column = styled(MainColumn)`
   min-height: 514px;
-  @media (min-width: 1261px) {
-    display: none;
-  }
+  width: 100%;
 `
 
 export const Column3 = () => {
-  return <Column>asd</Column>
+  return (
+    <Column>
+      <CurrentProject />
+    </Column>
+  )
 }

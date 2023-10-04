@@ -1,4 +1,4 @@
-import { Player } from '@cards'
+import { Player } from '@screens'
 import { MainColumn } from '@components'
 
 export const Column2 = () => {

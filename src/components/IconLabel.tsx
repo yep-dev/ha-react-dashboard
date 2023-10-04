@@ -8,7 +8,7 @@ type Props = {
 export const IconLabel = ({ icon, onClick }: Props) => {
   return (
     <Card
-      transparent
+      color="transparent"
       size="inherit"
       gap={0}
       align="center"

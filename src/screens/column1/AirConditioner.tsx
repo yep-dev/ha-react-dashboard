@@ -44,7 +44,7 @@ export const AirConditioner = () => {
             onClick={() => {
               setPresetMode('quiet')
             }}
-            active={ac.state === 'cool' && ac.attributes.preset_mode === 'quiet'}
+            active={ac.state !== 'off' && ac.attributes.preset_mode === 'quiet'}
           >
             Quiet
           </Card>
@@ -54,7 +54,7 @@ export const AirConditioner = () => {
               setFanMode('low')
             }}
             active={
-              ac.state === 'cool' &&
+              ac.state !== 'off' &&
               ac.attributes.preset_mode === 'off' &&
               ac.attributes.fan_mode === 'low'
             }
@@ -67,7 +67,7 @@ export const AirConditioner = () => {
               setFanMode('auto')
             }}
             active={
-              ac.state === 'cool' &&
+              ac.state !== 'off' &&
               ac.attributes.preset_mode === 'off' &&
               ac.attributes.fan_mode === 'auto'
             }
@@ -78,7 +78,7 @@ export const AirConditioner = () => {
             onClick={() => {
               setPresetMode('speed')
             }}
-            active={ac.state === 'cool' && ac.attributes.preset_mode === 'speed'}
+            active={ac.state !== 'off' && ac.attributes.preset_mode === 'speed'}
           >
             Turbo
           </Card>

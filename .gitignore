@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 supported-types.d.ts
+
+ProjectModal.tsx
+EntertainmentModal.tsx

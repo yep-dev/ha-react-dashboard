@@ -10,6 +10,9 @@ export type StackProps = {
   stretch?: boolean
   children?: React.ReactNode
   radius?: number | boolean
+  color?: string
+  fullWidth?: boolean
+  fullHeight?: boolean
 } & React.HTMLAttributes<HTMLDivElement>
 
 const StyledStack: FC<StackProps> = styled('div', {
@@ -23,6 +26,9 @@ const StyledStack: FC<StackProps> = styled('div', {
       'disableRadius',
       'beta',
       'active',
+      'background',
+      'fullWidth',
+      'fullHeight',
     ].includes(prop),
 })<StackProps>`
   display: flex;
@@ -33,9 +39,12 @@ const StyledStack: FC<StackProps> = styled('div', {
   flex-wrap: ${({ wrap = 'nowrap' }) => wrap};
   border-radius: ${({ radius }) => (radius ? (typeof radius === 'number' ? radius : 10) : 0)}px;
   overflow: hidden;
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'auto')};
+  height: ${({ fullHeight }) => (fullHeight ? '100%' : 'auto')};
 
   & > div {
     flex: 1;
+    ${({ color }) => color && `background-color: ${color};`}
   }
 `
 export const StackContext = createContext<boolean>(false)
