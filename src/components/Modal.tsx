@@ -1,5 +1,6 @@
 import { colors } from '@constants'
 import styled from '@emotion/styled'
+import { createContext } from 'react'
 
 export const ModalStyled = styled.div`
   position: fixed;
@@ -22,27 +23,43 @@ const Right = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;
-  background: ${colors.black};
   width: 630px;
   height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `
-
+const ChildrenWrapper = styled.div`
+  margin-top: auto;
+  background: ${colors.black};
+`
 type Props = {
   closeModal: () => void
   children: React.ReactNode
 }
+type ModalContextType = {
+  closeModal: () => void
+}
 
-export const Modal = ({ closeModal, children }: Props) => {
-  return (
+export const ModalContext = createContext<ModalContextType | null>(null)
+
+export const ModalProvider = ({ children, closeModal }: Props) => {
+  return <ModalContext.Provider value={{ closeModal }}>{children}</ModalContext.Provider>
+}
+
+export const Modal = ({ closeModal, children }: Props) => (
+  <ModalProvider closeModal={closeModal}>
     <ModalStyled onClick={closeModal}>
       <Overlay />
-      <Right
-        onClick={(e) => {
-          e.stopPropagation()
-        }}
-      >
-        {children}
+      <Right>
+        <ChildrenWrapper
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+        >
+          {children}
+        </ChildrenWrapper>
       </Right>
     </ModalStyled>
-  )
-}
+  </ModalProvider>
+)

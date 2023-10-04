@@ -23,7 +23,7 @@ export const Player = () => {
 
   return (
     <Stack column radius>
-      <Card style={{ direction: 'rtl' }}>
+      <Card style={{ direction: 'rtl', flex: 'inherit' }}>
         {player.attributes.media_title && (
           <Title>
             {player.attributes.media_artist} – {player.attributes.media_title.replace('.flac', '')}{' '}

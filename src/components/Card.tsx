@@ -45,20 +45,22 @@ export const Card = ({
   }
 
   const sizeToHeightMap = {
-    stretch: '100%',
     inherit: 'inherit',
     sm: 40,
     md: 50,
     lg: 60,
   }
-  const height = sizeToHeightMap[size ?? 'md']
+  const height = size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined
+  if (size === 'stretch') {
+    style = { ...style, flex: 1 }
+  }
 
   return (
     <StyledCard
       onClick={handleClick}
       disableRadius={disableRadius}
       active={active}
-      style={{ minHeight: height, maxHeight: height, ...style }}
+      style={{ height, ...style }}
       {...rest}
     >
       {children}

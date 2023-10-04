@@ -1,6 +1,6 @@
 import { MainColumn } from '@components'
 import styled from '@emotion/styled'
-import { CurrentProject } from '@screens'
+import { CurrentProject, CurrentProjectTimer, DmnModal } from '@screens'
 
 const Column = styled(MainColumn)`
   min-height: 514px;
@@ -9,8 +9,10 @@ const Column = styled(MainColumn)`
 
 export const Column3 = () => {
   return (
-    <Column>
+    <Column column align="flex-start">
       <CurrentProject />
+      <CurrentProjectTimer />
+      <DmnModal />
     </Column>
   )
 }
