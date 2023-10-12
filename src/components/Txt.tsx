@@ -2,7 +2,7 @@ import { colors } from '@constants'
 import styled from '@emotion/styled'
 
 type Props = {
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'xs' | 'sm' | 'md' | 'lg'
   weight?: 'light' | 'normal' | 'bold'
   color?: 'main' | 'dark' | 'darker'
   textAlign?: string
@@ -11,6 +11,8 @@ type Props = {
 export const Txt = styled.span<Props>`
   font-size: ${({ size = 'md' }) => {
     switch (size) {
+      case 'xs':
+        return '12px'
       case 'sm':
         return '16px'
       case 'lg':

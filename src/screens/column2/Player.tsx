@@ -11,7 +11,7 @@ const Title = styled.div`
 `
 
 export const Player = () => {
-  const player = useEntity('media_player.desk_2')
+  const player = useEntity('media_player.desk')
   // hakit – fix type assigned
 
   const playRadio = () => {

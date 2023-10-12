@@ -24,6 +24,7 @@ export const colors = {
   dark: '#202020',
   light: categoryColors.idling,
   green: categoryColors.research,
+  yellow: categoryColors.mind,
   orange: categoryColors.food,
   red: categoryColors.sleep,
 }

@@ -13,7 +13,7 @@ export const TabColumn = () => {
     <Column>
       <Stack>
         <Card.Icon
-          icon="controls-next"
+          icon="printer"
           onClick={() => {
             printer.api.turnOn()
           }}
