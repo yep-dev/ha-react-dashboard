@@ -1,6 +1,4 @@
-import { ModalContext } from '@components'
 import { format } from 'date-fns'
-import { useContext } from 'react'
 
 export const textToCamel = (text: string) =>
   text
@@ -12,11 +10,5 @@ export const textToCamel = (text: string) =>
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
     .join('')
-
-export const useModal = () => {
-  const context = useContext(ModalContext)
-  if (!context) throw new Error('useModal must be used within ModalProvider')
-  return context
-}
 
 export const dateTime = (date: Date) => format(date, 'yyyy-MM-dd HH:mm:ss')

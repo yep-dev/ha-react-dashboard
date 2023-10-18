@@ -1,5 +1,6 @@
-import { Mobile } from '@screens'
 import { useEntity } from '@hakit/core'
+import { Modals, ModalsProvider } from '@modals'
+import { Mobile } from '@screens'
 import { useEffect } from 'react'
 
 const App = () => {
@@ -14,7 +15,12 @@ const App = () => {
     }
   }, [refreshTrigger])
 
-  return <Mobile />
+  return (
+    <ModalsProvider>
+      <Mobile />
+      <Modals />
+    </ModalsProvider>
+  )
 }
 
 export default App
