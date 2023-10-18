@@ -30,7 +30,7 @@ export const Player = () => {
           </Title>
         )}
       </Card>
-      <Stack>
+      <Stack radius={0}>
         <Card.Icon
           icon={player.state === 'playing' ? 'controls-pause' : 'controls-play'}
           onClick={() => {
@@ -74,7 +74,7 @@ export const Player = () => {
           }}
         />
       </Stack>
-      <Stack>
+      <Stack radius={0}>
         <Card.Icon
           icon="radio-antenna-1"
           active={player.attributes.media_content_id === 'radioparadise://4.flac'}

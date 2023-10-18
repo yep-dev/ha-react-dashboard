@@ -8,17 +8,31 @@ type CardProps = {
   onClick?: () => void
   active?: boolean
   color?: string
+  progress?: number
   secondClick?(): void
   size?: 'sm' | 'md' | 'lg' | 'stretch' | 'inherit'
   beta?: boolean
 } & StackProps
 
 const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
-  background-color: ${({ active, color }) => (color ? color : active ? colors.light : colors.dark)};
   cursor: pointer;
   border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
   opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
   padding: 0 6px;
+  flex: 1;
+  position: relative;
+  z-index: 0;
+`
+
+const ProgressBar = styled.div<{ progress: number; color: string }>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  background-color: ${({ color }) => color};
+  width: ${({ progress }) => `${progress * 100}%`};
+  z-index: -1;
+  transition: width 1s ease;
 `
 
 StyledCard.defaultProps = {
@@ -31,11 +45,11 @@ export const Card = ({
   secondClick,
   children,
   size,
+  progress,
   style,
   ...rest
 }: CardProps) => {
-  const disableRadius = useContext(StackContext)
-
+  const { radius, color } = useContext(StackContext)
   const handleClick = () => {
     if (active) {
       secondClick?.()
@@ -55,14 +69,18 @@ export const Card = ({
     style = { ...style, flex: 1 }
   }
 
+  const backgroundColor = rest.color ?? color ?? (active ? colors.light : colors.dark)
+
   return (
     <StyledCard
       onClick={handleClick}
-      disableRadius={disableRadius}
+      disableRadius={radius}
+      color={rest.color ?? color}
       active={active}
-      style={{ height, ...style }}
+      style={{ height, backgroundColor, ...style }}
       {...rest}
     >
+      {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}
       {children}
     </StyledCard>
   )

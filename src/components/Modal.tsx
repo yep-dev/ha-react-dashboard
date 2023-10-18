@@ -8,6 +8,7 @@ export const ModalStyled = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
+  z-index: 1;
 `
 
 const Overlay = styled.div`
@@ -30,15 +31,18 @@ const Right = styled.div`
   justify-content: flex-end;
 `
 const ChildrenWrapper = styled.div`
-  margin-top: auto;
+  margin: auto 0;
   background: ${colors.black};
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 type Props = {
-  closeModal: () => void
+  closeModal: (next?: boolean) => void
   children: React.ReactNode
 }
 type ModalContextType = {
-  closeModal: () => void
+  closeModal: (next?: boolean) => void
 }
 
 export const ModalContext = createContext<ModalContextType | null>(null)
@@ -49,7 +53,11 @@ export const ModalProvider = ({ children, closeModal }: Props) => {
 
 export const Modal = ({ closeModal, children }: Props) => (
   <ModalProvider closeModal={closeModal}>
-    <ModalStyled onClick={closeModal}>
+    <ModalStyled
+      onClick={() => {
+        closeModal()
+      }}
+    >
       <Overlay />
       <Right>
         <ChildrenWrapper

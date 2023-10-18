@@ -1,5 +1,5 @@
 import { Card, Modal } from '@components'
-import { categoryColors, colors } from '@constants.ts'
+import { categoryColors } from '@constants.ts'
 import { useEntity } from '@hakit/core'
 import { ProjectModal } from '@screens'
 import { useState } from 'react'
@@ -19,7 +19,7 @@ export const CurrentProject = () => {
       <Card
         size="lg"
         align="space-around"
-        color={categoryColors[category.toLowerCase() as keyof typeof categoryColors] || colors.dark}
+        color={categoryColors[category.toLowerCase() as keyof typeof categoryColors]}
         onClick={() => {
           setShowModal(true)
         }}

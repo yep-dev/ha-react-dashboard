@@ -1,6 +1,6 @@
 import { MainColumn } from '@components'
 import styled from '@emotion/styled'
-import { CurrentProject, CurrentProjectTimer, DmnModal } from '@screens'
+import { CurrentProject, CurrentProjectTimer, DmnPicker } from '@screens'
 import { Resources } from '@screens/column3/Resources.tsx'
 
 const Column = styled(MainColumn)`
@@ -13,7 +13,7 @@ export const Column3 = () => {
     <Column column align="flex-start">
       <CurrentProject />
       <CurrentProjectTimer />
-      <DmnModal />
+      <DmnPicker />
       <Resources />
     </Column>
   )

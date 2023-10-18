@@ -27,4 +27,4 @@ supported-types.d.ts
 
 ProjectModal.tsx
 EntertainmentModal.tsx
-DmnModal.tsx
+DmnPicker.tsx

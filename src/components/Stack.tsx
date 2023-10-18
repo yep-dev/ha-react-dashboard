@@ -1,5 +1,5 @@
-import { CSSProperties, FC, createContext } from 'react'
 import styled from '@emotion/styled'
+import { createContext, CSSProperties, FC } from 'react'
 
 export type StackProps = {
   gap?: number | string
@@ -44,19 +44,14 @@ const StyledStack: FC<StackProps> = styled('div', {
 
   & > div {
     flex: 1;
-    ${({ color }) => color && `background-color: ${color};`}
   }
 `
-export const StackContext = createContext<boolean>(false)
+export const StackContext = createContext<{ radius: boolean; color?: string }>({ radius: false })
 
-export const Stack: FC<StackProps> = ({ children, radius, ...rest }) => {
-  return radius ? (
-    <StackContext.Provider value={Boolean(radius)}>
-      <StyledStack radius={radius} {...rest}>
-        {children}
-      </StyledStack>
-    </StackContext.Provider>
-  ) : (
-    <StyledStack {...rest}>{children}</StyledStack>
-  )
-}
+export const Stack: FC<StackProps> = ({ children, radius, color, ...rest }) => (
+  <StackContext.Provider value={{ radius: radius !== undefined, color }}>
+    <StyledStack radius={radius} {...rest}>
+      {children}
+    </StyledStack>
+  </StackContext.Provider>
+)
