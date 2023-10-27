@@ -3,19 +3,20 @@ import { useEntity } from '@hakit/core'
 import { useModal } from '@modals/index.ts'
 import { dateTime } from '@utils.ts'
 import { addMinutes } from 'date-fns'
-import { useDebounce } from 'react-use'
 
 const Time = ({ time, children }: { time: number; children: React.ReactNode }) => {
   const { close } = useModal('estimate')
   const { close: closeProject } = useModal('project')
   const { close: closeEntertainment } = useModal('projectEntertainment')
   const end = useEntity('input_datetime.task_estimate_end')
+  const start = useEntity('input_datetime.task_start')
 
   const handleClick = () => {
     close()
     closeProject()
     closeEntertainment()
     end.api.setDatetime({ datetime: dateTime(addMinutes(new Date(), time)) })
+    start.api.setDatetime({ datetime: dateTime(new Date()) })
   }
 
   return (
@@ -26,16 +27,6 @@ const Time = ({ time, children }: { time: number; children: React.ReactNode }) =
 }
 
 export const EstimateModal = () => {
-  const { open, isOpen } = useModal('estimate')
-  const estimateEnd = useEntity('input_datetime.task_estimate_end').state
-  const category = useEntity('input_select.category').state
-
-  useDebounce(() => {
-    if (estimateEnd.startsWith('1970') && category !== 'Idling' && !isOpen) {
-      open()
-    }
-  }, 1000)
-
   return (
     <Modal name="estimate">
       <Stack fullWidth style={{ marginTop: 'auto', height: 400, zIndex: 10 }}>

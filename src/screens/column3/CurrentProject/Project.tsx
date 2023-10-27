@@ -2,7 +2,6 @@ import { Card } from '@components'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
 import { dateTime } from '@utils'
-import { fromUnixTime } from 'date-fns'
 
 type Props = {
   name: string
@@ -18,7 +17,7 @@ export const Project = ({ name, color, size = 'stretch' }: Props) => {
   const handleClick = () => {
     open()
     select({ option: name })
-    estimateEnd.api.setDatetime({ datetime: dateTime(fromUnixTime(0)) })
+    estimateEnd.api.setDatetime({ datetime: dateTime(new Date()) })
   }
 
   return (

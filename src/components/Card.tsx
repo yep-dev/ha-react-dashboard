@@ -47,14 +47,17 @@ export const Card = ({
   size,
   progress,
   style,
+  beta,
   ...rest
 }: CardProps) => {
   const { radius, color } = useContext(StackContext)
   const handleClick = () => {
-    if (active) {
-      secondClick?.()
-    } else {
-      onClick?.()
+    if (!beta) {
+      if (active) {
+        secondClick?.()
+      } else {
+        onClick?.()
+      }
     }
   }
 
@@ -78,6 +81,7 @@ export const Card = ({
       color={rest.color ?? color}
       active={active}
       style={{ height, backgroundColor, ...style }}
+      beta={beta}
       {...rest}
     >
       {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}
