@@ -31,18 +31,16 @@ export const EstimateModal = () => {
     <Modal name="estimate">
       <Stack fullWidth style={{ marginTop: 'auto', height: 400, zIndex: 10 }}>
         <Stack column>
-          <Time time={30}>40 min</Time>
-          <Time time={50}>50 min</Time>
+          <Time time={30}>30 min</Time>
+          <Time time={45}>45 min</Time>
           <Time time={60}>1h</Time>
-          <Time time={75}>1h 15min</Time>
-          <Time time={90}>1h 30min</Time>
         </Stack>
         <Stack column>
+          <Time time={1}>1 min</Time>
           <Time time={5}>5 min</Time>
           <Time time={10}>10 min</Time>
           <Time time={15}>15 min</Time>
           <Time time={20}>20 min</Time>
-          <Time time={25}>30 min</Time>
         </Stack>
       </Stack>
     </Modal>

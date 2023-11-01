@@ -7,33 +7,46 @@ export const Sensors = () => {
   const xperiaCharging = useEntity('sensor.xperia_battery_state')
   const tabBattery = useEntity('sensor.tab_battery_level')
   const tabCharging = useEntity('sensor.tab_battery_state')
+  const officeTemperature = useEntity('sensor.office_temperature')
 
   return (
-    <Stack gap={6}>
-      <InfoCard
-        icon="pollution-co2"
-        value={Number(co2.state)}
-        green={440}
-        orange={800}
-        red={1000}
-        invert
-      />
-      <InfoCard
-        icon="mobile-phone-2"
-        suffix="%"
-        value={Number(xperiaBattery.state)}
-        green={xperiaCharging.state === 'charging' ? 80 : undefined}
-        orange={xperiaCharging.state === 'charging' ? undefined : 20}
-        red={xperiaCharging.state === 'charging' ? undefined : 10}
-      />
-      <InfoCard
-        icon="tablet-1"
-        suffix="%"
-        value={Number(tabBattery.state)}
-        green={tabCharging.state === 'charging' ? 80 : undefined}
-        orange={tabCharging.state === 'charging' ? undefined : 20}
-        red={tabCharging.state === 'charging' ? undefined : 10}
-      />
+    <Stack column>
+      <Stack gap={6}>
+        <InfoCard
+          icon="pollution-co2"
+          value={Number(co2.state)}
+          green={440}
+          orange={800}
+          red={1000}
+          invert
+        />
+        <InfoCard
+          icon="mobile-phone-2"
+          suffix="%"
+          value={Number(xperiaBattery.state)}
+          green={xperiaCharging.state === 'charging' ? 80 : undefined}
+          orange={xperiaCharging.state === 'charging' ? undefined : 20}
+          red={xperiaCharging.state === 'charging' ? undefined : 10}
+        />
+        <InfoCard
+          icon="tablet-1"
+          suffix="%"
+          value={Number(tabBattery.state)}
+          green={tabCharging.state === 'charging' ? 80 : undefined}
+          orange={tabCharging.state === 'charging' ? undefined : 20}
+          red={tabCharging.state === 'charging' ? undefined : 10}
+        />
+      </Stack>
+      <Stack gap={6}>
+        <InfoCard
+          icon="pollution-co2"
+          value={Math.round(parseFloat(officeTemperature.state) * 10) / 10}
+          green={440}
+          orange={800}
+          red={1000}
+          invert
+        />
+      </Stack>
     </Stack>
   )
 }

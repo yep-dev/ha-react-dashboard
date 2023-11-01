@@ -10,7 +10,7 @@ export const Notifications = () => {
   const [notifications, setNotifications] = useState<Notification[]>([])
 
   useEffect(() => {
-    const ws = new WebSocket('ws://10.0.0.100:6400/ws/notifications')
+    const ws = new WebSocket('wss://10.0.0.100:6400/ws/notifications')
 
     ws.onmessage = (event) => {
       setNotifications(JSON.parse(event.data))

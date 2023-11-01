@@ -53,7 +53,6 @@ const Resource = ({ name, inverted }: Props) => {
 export const Resources = () => {
   return (
     <Stack radius>
-      <Resource name="social" />
       <Resource name="energy" />
       <Resource name="mental" />
       <Resource name="wandering" inverted />
