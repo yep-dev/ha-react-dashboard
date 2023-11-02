@@ -18,7 +18,7 @@ export const Mobile = () => {
   const updateVisibility = () => {
     const urlParams = new URLSearchParams(window.location.search)
 
-    if (urlParams.get('env') === 'xperia') {
+    if (urlParams.get('env') === 'mobile') {
       if (document.visibilityState === 'visible') {
         xperiaScreen.api.turnOn()
       } else {
