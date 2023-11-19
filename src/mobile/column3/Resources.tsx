@@ -1,5 +1,5 @@
 import { Card, Stack, Txt } from '@components'
-import { colors } from '@constants'
+import { colors } from '@constants.ts'
 import { EntityName, HassEntityWithService, useEntity } from '@hakit/core'
 import { useState } from 'react'
 import { useDebounce } from 'react-use'

@@ -1,8 +1,8 @@
 import { GlobalContext, GlobalData } from '@GlobalData'
 import { useEntity } from '@hakit/core'
 import { ModalsProvider } from '@modals'
-import { Mobile } from '@screens'
-import { Stats } from '@screens/stats/Stats.tsx'
+import { Mobile } from '@mobile'
+import { Stats } from '@stats'
 import ky from 'ky'
 import { useEffect, useState } from 'react'
 

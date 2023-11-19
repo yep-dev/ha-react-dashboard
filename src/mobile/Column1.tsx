@@ -1,5 +1,5 @@
 import { Stack } from '@components'
-import { AirConditioner, DateTime, MobileColumn, Sensors, TimeBlock } from '@screens'
+import { AirConditioner, DateTime, MobileColumn, Sensors, TimeBlock } from '@mobile'
 
 export const Column1 = () => {
   return (

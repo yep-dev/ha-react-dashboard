@@ -1,7 +1,5 @@
 import { Stack } from '@components'
-import { TimeScaleComponent } from '@screens/stats/components/TimeScale.tsx'
-import { ProjectTimeline } from '@screens/stats/timelines/ProjectTimeline.tsx'
-import { SlotsTimeline } from '@screens/stats/timelines/SlotsTimeline.tsx'
+import { ProjectTimeline, SlotsTimeline, TimeScaleComponent } from '@stats'
 
 export type SensorData = {
   last_changed: string

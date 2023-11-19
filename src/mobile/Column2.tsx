@@ -1,4 +1,4 @@
-import { MobileColumn, Notifications, Player } from '@screens'
+import { MobileColumn, Notifications, Player } from '@mobile'
 
 export const Column2 = () => {
   return (

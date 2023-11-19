@@ -1,7 +1,7 @@
 import { Card, Stack } from '@components'
 import styled from '@emotion/styled'
 import { useEntity } from '@hakit/core'
-import { MobileColumn } from '@screens'
+import { MobileColumn } from '@mobile'
 
 const Column = styled(MobileColumn)`
   min-height: 514px;

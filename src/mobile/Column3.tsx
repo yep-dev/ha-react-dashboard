@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { CurrentProject, CurrentProjectTimer, DmnPicker } from '@screens'
-import { MobileColumn } from './MobileColumn'
+import { CurrentProject, CurrentProjectTimer, DmnPicker } from '@mobile'
+import { MobileColumn } from 'mobile/MobileColumn.tsx'
 
 const Column = styled(MobileColumn)`
   min-height: 514px;

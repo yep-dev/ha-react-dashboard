@@ -1,7 +1,7 @@
 import { Stack } from '@components'
 import { useEntity } from '@hakit/core'
+import { Column1, Column2, Column3, MobileColumn, TabColumn } from '@mobile'
 import { DmnModal, EntertainmentModal, EstimateModal, ProjectModal } from '@modals'
-import { Column1, Column2, Column3, MobileColumn, TabColumn } from '@screens'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
 
