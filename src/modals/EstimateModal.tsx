@@ -2,7 +2,7 @@ import { Card, Modal, Stack } from '@components'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals/index.ts'
 import { dateTime } from '@utils.ts'
-import { addMinutes } from 'date-fns'
+import { addSeconds } from 'date-fns'
 
 const Time = ({ time, children }: { time: number; children: React.ReactNode }) => {
   const { close } = useModal('estimate')
@@ -15,8 +15,8 @@ const Time = ({ time, children }: { time: number; children: React.ReactNode }) =
     close()
     closeProject()
     closeEntertainment()
-    end.api.setDatetime({ datetime: dateTime(addMinutes(new Date(), time)) })
-    start.api.setDatetime({ datetime: dateTime(new Date()) })
+    end.service.setDatetime({ datetime: dateTime(addSeconds(new Date(), time * 60)) })
+    start.service.setDatetime({ datetime: dateTime(new Date()) })
   }
 
   return (
@@ -36,6 +36,7 @@ export const EstimateModal = () => {
           <Time time={60}>1h</Time>
         </Stack>
         <Stack column>
+          <Time time={0.2}>12s</Time>
           <Time time={1}>1 min</Time>
           <Time time={5}>5 min</Time>
           <Time time={10}>10 min</Time>

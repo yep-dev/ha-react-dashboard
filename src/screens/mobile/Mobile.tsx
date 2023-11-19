@@ -1,10 +1,11 @@
-import { MainColumn, Stack } from '@components'
-import { HassEntityWithApi, useEntity } from '@hakit/core'
-import { Column1, Column2, Column3, TabColumn } from '@screens'
+import { Stack } from '@components'
+import { useEntity } from '@hakit/core'
+import { DmnModal, EntertainmentModal, EstimateModal, ProjectModal } from '@modals'
+import { Column1, Column2, Column3, MobileColumn, TabColumn } from '@screens'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
 
-MainColumn.defaultProps = {
+MobileColumn.defaultProps = {
   column: true,
   align: 'flex-start',
   gap: 8,
@@ -12,17 +13,15 @@ MainColumn.defaultProps = {
 
 export const Mobile = () => {
   const isSmallScreen = useMedia('(max-width: 1258px)')
-  const xperiaScreen = useEntity(
-    'input_boolean.xperia_screen',
-  ) as HassEntityWithApi<'input_boolean'>
+  const xperiaScreen = useEntity('input_boolean.xperia_screen')
   const updateVisibility = () => {
     const urlParams = new URLSearchParams(window.location.search)
 
     if (urlParams.get('env') === 'mobile') {
       if (document.visibilityState === 'visible') {
-        xperiaScreen.api.turnOn()
+        xperiaScreen.service.turnOn()
       } else {
-        xperiaScreen.api.turnOff()
+        xperiaScreen.service.turnOff()
       }
     }
   }
@@ -40,6 +39,10 @@ export const Mobile = () => {
       <Column2 />
       {isSmallScreen && <TabColumn />}
       <Column3 />
+      <ProjectModal />
+      <EntertainmentModal />
+      <EstimateModal />
+      <DmnModal />
     </Stack>
   )
 }

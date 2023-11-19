@@ -1,9 +1,18 @@
+import { GlobalContext, GlobalData } from '@GlobalData'
 import { useEntity } from '@hakit/core'
-import { Modals, ModalsProvider } from '@modals'
+import { ModalsProvider } from '@modals'
 import { Mobile } from '@screens'
-import { useEffect } from 'react'
+import { Stats } from '@screens/stats/Stats.tsx'
+import ky from 'ky'
+import { useEffect, useState } from 'react'
+
+const pages = {
+  mobile: Mobile,
+  stats: Stats,
+} as const
 
 const App = () => {
+  const [globalData, setGlobalData] = useState<GlobalData>()
   const refreshTrigger = useEntity('input_datetime.trigger_dashboard_reload').state
 
   useEffect(() => {
@@ -15,12 +24,26 @@ const App = () => {
     }
   }, [refreshTrigger])
 
-  return (
-    <ModalsProvider>
-      <Mobile />
-      <Modals />
-    </ModalsProvider>
-  )
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await ky
+        .get(import.meta.env.VITE_HA_URL + '/local/data.json')
+        .json<GlobalData>()
+      setGlobalData(response)
+    }
+    fetchData()
+  }, [])
+
+  const queryParams = new URLSearchParams(window.location.search)
+  const Component = pages[(queryParams.get('page') ?? 'mobile') as keyof typeof pages]
+
+  return globalData ? (
+    <GlobalContext.Provider value={globalData}>
+      <ModalsProvider>
+        <Component />
+      </ModalsProvider>
+    </GlobalContext.Provider>
+  ) : null
 }
 
 export default App

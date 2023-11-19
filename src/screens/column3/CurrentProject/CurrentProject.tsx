@@ -12,7 +12,7 @@ export const CurrentProject = () => {
   return (
     <>
       <Card
-        size="lg"
+        size="xl"
         align="space-around"
         color={categoryColors[category.toLowerCase() as keyof typeof categoryColors]}
         onClick={open}

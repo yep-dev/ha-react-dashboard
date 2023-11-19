@@ -1,11 +1,10 @@
-import { MainColumn } from '@components'
-import { Notifications, Player } from '@screens'
+import { MobileColumn, Notifications, Player } from '@screens'
 
 export const Column2 = () => {
   return (
-    <MainColumn>
+    <MobileColumn>
       <Player />
       <Notifications />
-    </MainColumn>
+    </MobileColumn>
   )
 }

@@ -1,15 +1,15 @@
-import { MainColumn, Stack } from '@components'
-import { AirConditioner, DateTime, Sensors, TimeBlock } from '@screens'
+import { Stack } from '@components'
+import { AirConditioner, DateTime, MobileColumn, Sensors, TimeBlock } from '@screens'
 
 export const Column1 = () => {
   return (
-    <MainColumn>
+    <MobileColumn>
       <DateTime />
       <TimeBlock />
       <AirConditioner />
       <Stack>
         <Sensors />
       </Stack>
-    </MainColumn>
+    </MobileColumn>
   )
 }

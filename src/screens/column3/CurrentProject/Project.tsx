@@ -10,11 +10,11 @@ type Props = {
 
 export const Project = ({ name, color, size = 'stretch' }: Props) => {
   const { open } = useModal('estimate')
-  const select = useEntity('input_select.project').api.selectOption
+  const select = useEntity('input_select.project')
 
   const handleClick = () => {
     open()
-    select({ option: name })
+    select.service.selectOption({ option: name })
   }
 
   return (

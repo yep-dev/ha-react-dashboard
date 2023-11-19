@@ -41,6 +41,7 @@ module.exports = {
     "@typescript-eslint/consistent-type-definitions": [1, "type"],
     "@typescript-eslint/no-unused-vars": 1,
     "react/no-unknown-property": ['error', { ignore: ['css'] }],
+    "@typescript-eslint/no-floating-promises": 0, 
     "@typescript-eslint/no-unsafe-enum-comparison": 0, // temporary
   },
 }

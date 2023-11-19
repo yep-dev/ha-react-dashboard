@@ -1,7 +1,7 @@
 import { Stack } from '@components'
 import styled from '@emotion/styled'
 
-export const MainColumn = styled(Stack)`
+export const MobileColumn = styled(Stack)`
   min-width: 417px;
   max-width: 417px;
   min-height: 540px;

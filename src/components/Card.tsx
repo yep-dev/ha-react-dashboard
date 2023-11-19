@@ -10,7 +10,7 @@ type CardProps = {
   color?: string
   progress?: number
   secondClick?(): void
-  size?: 'sm' | 'md' | 'lg' | 'stretch' | 'inherit'
+  size?: 'sm' | 'md' | 'lg' | 'xl' | 'stretch' | 'inherit'
   beta?: boolean
 } & StackProps
 
@@ -66,6 +66,7 @@ export const Card = ({
     sm: 40,
     md: 50,
     lg: 60,
+    xl: 80,
   }
   const height = size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined
   if (size === 'stretch') {

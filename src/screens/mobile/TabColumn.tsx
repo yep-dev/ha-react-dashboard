@@ -1,8 +1,9 @@
-import { Card, MainColumn, Stack } from '@components'
+import { Card, Stack } from '@components'
 import styled from '@emotion/styled'
 import { useEntity } from '@hakit/core'
+import { MobileColumn } from '@screens'
 
-const Column = styled(MainColumn)`
+const Column = styled(MobileColumn)`
   min-height: 514px;
 `
 
@@ -15,7 +16,7 @@ export const TabColumn = () => {
         <Card.Icon
           icon="printer"
           onClick={() => {
-            printer.api.turnOn()
+            printer.service.turnOn()
           }}
         />
       </Stack>

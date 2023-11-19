@@ -19,7 +19,7 @@ export const CurrentProjectTimer = () => {
     if (isOpen) {
       setEstimateTimeout(
         setTimeout(() => {
-          project.api.selectOption({ option: 'Idling' })
+          project.service.selectOption({ option: 'Idling' })
         }, 30000),
       )
     } else {
@@ -71,47 +71,41 @@ export const CurrentProjectTimer = () => {
     1000,
     [durationSeconds, category, isOpen],
   )
+  const afterExpiration = Math.max(timePassedSeconds - durationSeconds, 0)
 
   useEffect(() => {
     if ('vibrate' in navigator && !['Sleep', 'Outside', 'Social'].includes(category)) {
-      // if (timePassed == duration && category !== 'Idling') {
-      //   navigator.vibrate([300, 150, 300])
-      // }
-      if (
-        (timePassedSeconds - durationSeconds) % 120 === 0 &&
-        timePassedSeconds >= durationSeconds
-      ) {
+      if (afterExpiration && afterExpiration % 120 === 1 && !isOpen) {
         navigator.vibrate(400)
       }
     }
   }, [timePassedSeconds, durationSeconds])
 
+  const progressValue =
+    afterExpiration && afterExpiration <= 60 && project.state !== 'Idling'
+      ? afterExpiration / 60
+      : timePassedSeconds / durationSeconds
+
   return (
     <Stack radius>
       <Card
-        size="lg"
+        size="xl"
         align="space-around"
         onClick={() => {
           if (project.state !== 'Idling') {
-            project.api.selectOption({ option: 'Idling' })
+            project.service.selectOption({ option: 'Idling' })
           }
         }}
-        progress={timePassedSeconds / durationSeconds}
-        color={
-          timePassed >= duration
-            ? Math.abs(timePassed - duration) > 2
-              ? colors.red
-              : colors.orange
-            : undefined
-        }
+        progress={progressValue}
+        color={afterExpiration ? (afterExpiration <= 60 ? colors.orange : colors.red) : undefined}
       >
         {`${timePassed}`} {duration > 0 && `/ ${duration}`} minutes{' '}
         {process.env.NODE_ENV === 'development' && `(${timePassedSeconds}/${durationSeconds})`}
       </Card>
       <Card.Icon
         icon="time-stopwatch"
-        size="lg"
-        style={{ maxWidth: 80 }}
+        size="xl"
+        style={{ maxWidth: 100 }}
         onClick={open}
         beta={project.state === 'Idling'}
       />

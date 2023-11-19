@@ -1,4 +1,3 @@
-import { EntertainmentModal, EstimateModal, ProjectModal, DmnModal } from '@modals'
 import React, { createContext, useContext, useState } from 'react'
 
 type ModalData = {
@@ -60,15 +59,4 @@ export const useModal = (modalName: ModalName) => {
   }
 
   return { isOpen, modalData, open, close }
-}
-
-export const Modals = () => {
-  return (
-    <>
-      <ProjectModal />
-      <EntertainmentModal />
-      <EstimateModal />
-      <DmnModal />
-    </>
-  )
 }

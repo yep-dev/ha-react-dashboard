@@ -15,7 +15,7 @@ export const Player = () => {
   // hakit – fix type assigned
 
   const playRadio = () => {
-    player.api.playMedia({
+    player.service.playMedia({
       media_content_id: 'radioparadise://4.flac',
       media_content_type: 'music',
     })
@@ -36,41 +36,41 @@ export const Player = () => {
           onClick={() => {
             if (player.state === 'idle') {
               playRadio()
-            } else player.api.mediaPlayPause()
+            } else player.service.mediaPlayPause()
           }}
         />
         <Card.Icon
           icon="controls-previous"
           onClick={() => {
-            player.api.mediaSeek({ seek_position: 0.0001 })
+            player.service.mediaSeek({ seek_position: 0.0001 })
           }}
         />
         <Card.Icon
           icon="controls-next"
           onClick={() => {
-            if (player.attributes.repeat === 'one') player.api.repeatSet({ repeat: 'off' })
-            player.api.mediaNextTrack()
+            if (player.attributes.repeat === 'one') player.service.repeatSet({ repeat: 'off' })
+            player.service.mediaNextTrack()
           }}
         />
         <Card.Icon
           icon="volume-control-low"
           active={player.attributes.volume_level === 0.25}
           onClick={() => {
-            player.api.volumeSet({ volume_level: 0.25 })
+            player.service.volumeSet({ volume_level: 0.25 })
           }}
         />
         <Card.Icon
           icon="volume-control-medium"
           active={player.attributes.volume_level === 0.55}
           onClick={() => {
-            player.api.volumeSet({ volume_level: 0.55 })
+            player.service.volumeSet({ volume_level: 0.55 })
           }}
         />
         <Card.Icon
           icon="volume-control-full"
           active={player.attributes.volume_level === 0.67}
           onClick={() => {
-            player.api.volumeSet({ volume_level: 0.75 })
+            player.service.volumeSet({ volume_level: 0.75 })
           }}
         />
       </Stack>
@@ -84,10 +84,10 @@ export const Player = () => {
           icon="synchronize-arrow-1"
           active={player.attributes.repeat === 'one'}
           onClick={() => {
-            player.api.repeatSet({ repeat: 'one' })
+            player.service.repeatSet({ repeat: 'one' })
           }}
           secondClick={() => {
-            player.api.repeatSet({ repeat: 'off' })
+            player.service.repeatSet({ repeat: 'off' })
           }}
         />
         <Card.Icon icon="audio-file-search" beta />

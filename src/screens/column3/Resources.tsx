@@ -1,6 +1,6 @@
 import { Card, Stack, Txt } from '@components'
 import { colors } from '@constants'
-import { EntityName, HassEntityWithApi, useEntity } from '@hakit/core'
+import { EntityName, HassEntityWithService, useEntity } from '@hakit/core'
 import { useState } from 'react'
 import { useDebounce } from 'react-use'
 
@@ -10,15 +10,15 @@ type Props = {
 }
 
 const Resource = ({ name, inverted }: Props) => {
-  const { state, api } = useEntity(
+  const { state, service } = useEntity(
     ('input_select.resource_' + name) as EntityName,
-  ) as unknown as HassEntityWithApi<'input_select'>
+  ) as unknown as HassEntityWithService<'input_select'>
   const [localState, setLocalState] = useState(state)
 
   useDebounce(
     () => {
       if (localState !== state) {
-        api.selectOption({ option: localState })
+        service.selectOption({ option: localState })
       }
     },
     2000,

@@ -4,22 +4,22 @@ import { Card, IconLabel, Stack } from '@components'
 export const AirConditioner = () => {
   const ac = useEntity('climate.room_air_conditioner')
   const setTemperature = (temperature: number) => {
-    ac.api.setTemperature({ temperature })
+    ac.service.setTemperature({ temperature })
   }
 
   const turnOff = () => {
-    ac.api.turnOff()
+    ac.service.turnOff()
   }
 
   const setPresetMode = (presetMode: string) => {
     if (ac.state === 'off') {
-      ac.api.turnOn()
+      ac.service.turnOn()
     }
-    ac.api.setPresetMode({ preset_mode: presetMode })
+    ac.service.setPresetMode({ preset_mode: presetMode })
   }
 
   const setFanMode = (fanMode: string) => {
-    ac.api.setFanMode({ fan_mode: fanMode })
+    ac.service.setFanMode({ fan_mode: fanMode })
   }
 
   return (

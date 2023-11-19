@@ -1,9 +1,8 @@
-import { MainColumn } from '@components'
 import styled from '@emotion/styled'
 import { CurrentProject, CurrentProjectTimer, DmnPicker } from '@screens'
-import { Resources } from '@screens/column3/Resources.tsx'
+import { MobileColumn } from './MobileColumn'
 
-const Column = styled(MainColumn)`
+const Column = styled(MobileColumn)`
   min-height: 514px;
   width: 100%;
 `
@@ -14,7 +13,6 @@ export const Column3 = () => {
       <CurrentProject />
       <CurrentProjectTimer />
       <DmnPicker />
-      <Resources />
     </Column>
   )
 }
