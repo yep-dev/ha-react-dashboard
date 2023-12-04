@@ -29,15 +29,18 @@ const Time = ({ time, children }: { time: number; children: React.ReactNode }) =
 export const EstimateModal = () => {
   return (
     <Modal name="estimate">
-      <Stack fullWidth style={{ marginTop: 'auto', height: 400, zIndex: 10 }}>
+      <Stack fullWidth style={{ marginTop: 'auto', height: 450, zIndex: 10 }}>
+        <Stack column style={{ maxWidth: 150 }}>
+          {process.env.NODE_ENV === 'development' && <Time time={0.2}>12s</Time>}
+          <Time time={90}>1h 30m</Time>
+          <Time time={120}>2h</Time>
+        </Stack>
         <Stack column>
           <Time time={30}>30 min</Time>
           <Time time={45}>45 min</Time>
           <Time time={60}>1h</Time>
         </Stack>
         <Stack column>
-          <Time time={0.2}>12s</Time>
-          <Time time={1}>1 min</Time>
           <Time time={5}>5 min</Time>
           <Time time={10}>10 min</Time>
           <Time time={15}>15 min</Time>

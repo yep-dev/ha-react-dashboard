@@ -34,6 +34,7 @@ const App = () => {
     fetchData()
   }, [])
 
+  // HA serves only index.html, on nested path, so path-based routing isn't feasible
   const queryParams = new URLSearchParams(window.location.search)
   const Component = pages[(queryParams.get('page') ?? 'mobile') as keyof typeof pages]
 

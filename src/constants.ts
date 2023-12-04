@@ -7,7 +7,7 @@ export const categoryColors = {
   food: '#E36A00',
   chores: '#BF7000',
   research: '#2CA60A',
-  body: '#03A893',
+  body: '#0ba1a1',
   entertainment: '#C9806B',
   tech: '#465BB3',
   tinkering: '#990199',
@@ -16,6 +16,7 @@ export const categoryColors = {
   sleep: '#D92C2B',
   idling: '#525266',
   tasks: '#991101',
+  exploring: '#1c966a',
 }
 
 export const colors = {

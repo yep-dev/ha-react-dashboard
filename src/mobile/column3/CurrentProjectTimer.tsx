@@ -73,14 +73,6 @@ export const CurrentProjectTimer = () => {
   )
   const afterExpiration = Math.max(timePassedSeconds - durationSeconds, 0)
 
-  useEffect(() => {
-    if ('vibrate' in navigator && !['Sleep', 'Outside', 'Social'].includes(category)) {
-      if (afterExpiration && afterExpiration % 120 === 1 && !isOpen) {
-        navigator.vibrate(400)
-      }
-    }
-  }, [timePassedSeconds, durationSeconds])
-
   const progressValue =
     afterExpiration && afterExpiration <= 60 && project.state !== 'Idling'
       ? afterExpiration / 60
