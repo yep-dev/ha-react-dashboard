@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
-import { CurrentProject, CurrentProjectTimer, DmnPicker } from '@mobile'
-import { MobileColumn } from 'mobile/MobileColumn.tsx'
+import { useEntity } from '@hakit/core'
+import { CurrentProject, CurrentProjectTimer, DmnPicker, MobileColumn, SleepTimer } from '@mobile'
 
 const Column = styled(MobileColumn)`
   min-height: 514px;
@@ -8,10 +8,12 @@ const Column = styled(MobileColumn)`
 `
 
 export const Column3 = () => {
+  const sleep = useEntity('calendar.sleep').state
+
   return (
     <Column column align="flex-start">
       <CurrentProject />
-      <CurrentProjectTimer />
+      {sleep === 'on' ? <SleepTimer /> : <CurrentProjectTimer />}
       <DmnPicker />
     </Column>
   )

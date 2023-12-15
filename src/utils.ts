@@ -12,3 +12,17 @@ export const textToCamel = (text: string) =>
     .join('')
 
 export const dateTime = (date: Date) => format(date, 'yyyy-MM-dd HH:mm:ss')
+
+export const formatMinutes = (minutes: number) => {
+  let result = ''
+  if (minutes >= 60) {
+    result += `${Math.floor(minutes / 60)}h `
+    minutes = minutes % 60
+  }
+
+  if (minutes > 0) {
+    result += `${minutes}m`
+  }
+
+  return result
+}

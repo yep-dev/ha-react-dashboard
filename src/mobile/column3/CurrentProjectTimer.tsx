@@ -2,6 +2,7 @@ import { Card, Stack } from '@components'
 import { colors } from '@constants.ts'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
+import { formatMinutes } from '@utils'
 import { differenceInSeconds, isAfter } from 'date-fns'
 import { useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
@@ -91,8 +92,8 @@ export const CurrentProjectTimer = () => {
         progress={progressValue}
         color={afterExpiration ? (afterExpiration <= 60 ? colors.orange : colors.red) : undefined}
       >
-        {`${timePassed}`} {duration > 0 && `/ ${duration}`} minutes{' '}
-        {process.env.NODE_ENV === 'development' && `(${timePassedSeconds}/${durationSeconds})`}
+        {formatMinutes(timePassed)} {duration > 0 && `/ ${formatMinutes(duration)}`}
+        {process.env.NODE_ENV === 'development' && ` (${timePassedSeconds}/${durationSeconds})`}
       </Card>
       <Card.Icon
         icon="time-stopwatch"

@@ -1,7 +1,7 @@
 import { Stack } from '@components'
 import { useEntity } from '@hakit/core'
 import { Column1, Column2, Column3, MobileColumn, TabColumn } from '@mobile'
-import { DmnModal, EntertainmentModal, EstimateModal, ProjectModal } from '@modals'
+import { DmnModal, EntertainmentModal, SleepModal, ProjectModal, EstimateModal } from '@modals'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
 
@@ -42,6 +42,7 @@ export const Mobile = () => {
       <ProjectModal />
       <EntertainmentModal />
       <EstimateModal />
+      <SleepModal />
       <DmnModal />
     </Stack>
   )

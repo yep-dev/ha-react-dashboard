@@ -12,7 +12,7 @@ const Time = ({ time, children }: { time: number; children: React.ReactNode }) =
   const start = useEntity('input_datetime.task_start')
 
   const handleClick = () => {
-    close()
+    close({ time })
     closeProject()
     closeEntertainment()
     end.service.setDatetime({ datetime: dateTime(addSeconds(new Date(), time * 60)) })
