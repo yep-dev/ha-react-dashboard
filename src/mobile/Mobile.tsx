@@ -1,15 +1,9 @@
 import { Stack } from '@components'
 import { useEntity } from '@hakit/core'
-import { Column1, Column2, Column3, MobileColumn, TabColumn } from '@mobile'
+import { Column1, Column2, Column3, TabColumn } from '@mobile'
 import { DmnModal, EntertainmentModal, SleepModal, ProjectModal, EstimateModal } from '@modals'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
-
-MobileColumn.defaultProps = {
-  column: true,
-  align: 'flex-start',
-  gap: 8,
-}
 
 export const Mobile = () => {
   const isSmallScreen = useMedia('(max-width: 1258px)')

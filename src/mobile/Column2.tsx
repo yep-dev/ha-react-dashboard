@@ -1,10 +1,12 @@
-import { MobileColumn, Notifications, Player } from '@mobile'
+import { Stack } from '@components'
+import { Notifications, Player, Sequences } from '@mobile'
 
 export const Column2 = () => {
   return (
-    <MobileColumn>
+    <Stack.MobileColumn>
       <Player />
+      <Sequences />
       <Notifications />
-    </MobileColumn>
+    </Stack.MobileColumn>
   )
 }

@@ -35,13 +35,13 @@ export const GanttChart: React.FC<GanttChartProps> = ({ data, getColor }) => {
     const duration = differenceInSeconds(endTime, startTime)
     return `${(duration / 60 / 690) * totalWidth}px`
   }
-
   return (
     <Container>
       {data.map((item, index) => {
         const nextItem = data[index + 1]
         const width = computeWidth(item, nextItem)
 
+        console.log(item)
         return (
           <TimeSlot
             key={index}

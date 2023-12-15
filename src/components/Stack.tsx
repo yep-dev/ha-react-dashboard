@@ -48,10 +48,26 @@ const StyledStack: FC<StackProps> = styled('div', {
 `
 export const StackContext = createContext<{ radius: boolean; color?: string }>({ radius: false })
 
-export const Stack: FC<StackProps> = ({ children, radius, color, ...rest }) => (
+export const Stack = ({ children, radius, color, ...rest }: StackProps) => (
   <StackContext.Provider value={{ radius: radius !== undefined, color }}>
     <StyledStack radius={radius} {...rest}>
       {children}
     </StyledStack>
   </StackContext.Provider>
 )
+
+Stack.MobileColumn = styled(Stack)`
+  min-width: 417px;
+  max-width: 417px;
+  min-height: 540px;
+
+  & > div {
+    flex: none;
+  }
+`
+
+Stack.MobileColumn.defaultProps = {
+  column: true,
+  align: 'flex-start',
+  gap: 8,
+}
