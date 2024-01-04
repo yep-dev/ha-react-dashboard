@@ -27,7 +27,7 @@ const App = () => {
   useEffect(() => {
     const fetchData = async () => {
       const response = await ky
-        .get(import.meta.env.VITE_HA_URL + '/local/data.json')
+        .get(import.meta.env.VITE_HA_URL + '/local/project.json')
         .json<GlobalData>()
       setGlobalData(response)
     }

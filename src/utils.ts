@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { format, setHours, setMinutes } from 'date-fns'
 
 export const textToCamel = (text: string) =>
   text
@@ -20,9 +20,14 @@ export const formatMinutes = (minutes: number) => {
     minutes = minutes % 60
   }
 
-  if (minutes > 0) {
+  if (minutes > 0 || minutes % 60 == 0) {
     result += `${minutes}m`
   }
 
   return result
+}
+
+export const parseTime = (time: string) => {
+  const [hours, minutes] = time.split(':').map(Number)
+  return setMinutes(setHours(new Date(), hours), minutes)
 }

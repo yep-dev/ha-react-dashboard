@@ -10,9 +10,9 @@
     "preview": "vite preview",
     "barrels": "barrelsby -DS -c barrels.json && eslint \"src/**/index.ts\" --fix && chokidar 'src/**/*.*' --ignore 'src/**/index.ts' -c './filter_events.sh {event}:{path}'",
     "sync": "hakit-sync-types --token $HA_TOKEN --url $HA_URL",
-    "types": "./node_modules/.bin/ts-node --esm sync-types.ts",
+    "types": "node --loader ts-node/esm sync-types.ts",
     "deploy": "npm run build && ssh ${HA_SERVER} 'rm -rf /homeassistant/www/dashboard/*' && scp -r ~/projects/ha-react-dashboard/dist/* ${HA_SERVER}:/homeassistant/www/dashboard/ && npm run reload-deployed",
-    "reload-deployed": "./node_modules/.bin/ts-node --esm ./reload-deployed.ts"
+    "reload-deployed": "node --loader ts-node/esm ./reload-deployed.ts"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
@@ -56,7 +56,6 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "^3.0.3",
     "standard": "^17.1.0",
-    "ts-node": "^10.9.1",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-tsconfig-paths": "^4.2.1",

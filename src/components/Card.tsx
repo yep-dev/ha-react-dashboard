@@ -98,3 +98,9 @@ const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
 )
 
 Card.Icon = CardIcon
+
+const CardPadded = styled(Card)`
+  padding: 0 16px;
+`
+
+Card.Padded = CardPadded

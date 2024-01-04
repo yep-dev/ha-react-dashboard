@@ -23,32 +23,45 @@ const SlotInner = styled.div`
 `
 type GanttChartProps = {
   data: SensorData[]
-  getColor(state: string): string
+  getColor(state: string): string | string[]
+  duration: number
 }
 
-export const GanttChart: React.FC<GanttChartProps> = ({ data, getColor }) => {
+export const GanttChart: React.FC<GanttChartProps> = ({
+  data,
+  getColor,
+  duration: totalDuration,
+}) => {
   const totalWidth = 1920
 
   const computeWidth = (current: SensorData, next: SensorData | undefined) => {
     const endTime = next ? parseISO(next.last_changed) : new Date()
     const startTime = parseISO(current.last_changed)
     const duration = differenceInSeconds(endTime, startTime)
-    return `${(duration / 60 / 690) * totalWidth}px`
+    return `${(duration / 60 / totalDuration) * totalWidth}px`
   }
+
   return (
     <Container>
       {data.map((item, index) => {
         const nextItem = data[index + 1]
         const width = computeWidth(item, nextItem)
+        const color = getColor(item.state)
 
-        console.log(item)
+        console.log(color)
         return (
           <TimeSlot
             key={index}
             width={width}
-            style={{
-              backgroundColor: getColor(item.state),
-            }}
+            style={
+              Array.isArray(color)
+                ? {
+                    background: `linear-gradient(to bottom, ${color[0]} 50%, ${color[1]} 50%)`,
+                  }
+                : {
+                    backgroundColor: color,
+                  }
+            }
           >
             <SlotInner>{item.state}</SlotInner>
           </TimeSlot>

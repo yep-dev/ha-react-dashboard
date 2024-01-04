@@ -3,7 +3,6 @@
  */
 
 export * from './Stats'
-export * from './hooks'
 export * from './components/Gannt'
 export * from './components/TimeScale'
 export * from './timelines/ProjectTimeline'

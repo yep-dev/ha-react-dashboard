@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import { differenceInMinutes, format, setHours, setMinutes } from 'date-fns'
+import { parseTime } from '@utils'
+import { format } from 'date-fns'
 import React from 'react'
 
 const TimeScale = styled.div`
@@ -17,23 +18,19 @@ const HourMark = styled.div<{ width: string }>`
 type TimeScaleComponentProps = {
   startTime: string // HH:mm
   endTime: string
+  duration: number
 }
 
-export const TimeScaleComponent: React.FC<TimeScaleComponentProps> = ({ startTime, endTime }) => {
-  const parseTime = (time: string) => {
-    const [hours, minutes] = time.split(':').map(Number)
-    return setMinutes(setHours(new Date(), hours), minutes)
-  }
+export const TimeScaleComponent: React.FC<TimeScaleComponentProps> = ({ startTime, duration }) => {
   const start = parseTime(startTime)
-  const end = parseTime(endTime)
 
   const generateHourMarks = () => {
-    const totalDuration = differenceInMinutes(end, start)
-    const numberOfHours = Math.ceil(totalDuration / 60)
-    const widthPerHour = 1920 / (differenceInMinutes(end, start) / 60)
+    const numberOfHours = Math.ceil(duration / 60)
+    const widthPerHour = 1920 / (duration / 60)
+    console.log({ duration, numberOfHours, widthPerHour })
 
     return Array.from({ length: numberOfHours }, (_, index) => (
-      <HourMark key={index} width={`${widthPerHour}px`}>
+      <HourMark key={index} width={`${widthPerHour - 1}px`}>
         {format(new Date(start.getTime() + index * 60 * 60000), 'H')}
       </HourMark>
     ))
