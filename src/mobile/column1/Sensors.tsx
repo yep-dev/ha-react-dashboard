@@ -2,13 +2,13 @@ import { InfoCard, Stack } from '@components'
 import { useEntity } from '@hakit/core'
 
 export const Sensors = () => {
-  const co2 = useEntity('sensor.co2')
   const bandBattery = useEntity('sensor.band_battery')
   const xperiaBattery = useEntity('sensor.xperia_battery_level')
   const xperiaCharging = useEntity('sensor.xperia_battery_state')
   const tabBattery = useEntity('sensor.tab_battery_level')
   const tabCharging = useEntity('sensor.tab_battery_state')
-  const officeTemperature = useEntity('sensor.office_temperature')
+  const officeTemperature = useEntity('sensor.sht_office_temperature')
+  const officeHumidity = useEntity('sensor.sht_office_humidity')
 
   return (
     <Stack column>
@@ -39,17 +39,23 @@ export const Sensors = () => {
         />
       </Stack>
       <Stack gap={6}>
-        <InfoCard
-          icon="pollution-co2"
-          value={Number(co2.state)}
-          green={440}
-          orange={800}
-          red={1000}
-          invert
-        />
+        {/*<InfoCard*/}
+        {/*  icon="pollution-co2"*/}
+        {/*  value={Number(co2.state)}*/}
+        {/*  green={440}*/}
+        {/*  orange={800}*/}
+        {/*  red={1000}*/}
+        {/*  invert*/}
+        {/*/>*/}
         <InfoCard
           icon="temperature-thermometer"
-          value={Math.round(parseFloat(officeTemperature.state) * 10) / 10}
+          value={parseFloat(officeTemperature.state)}
+          suffix="°C"
+        />
+        <InfoCard
+          icon="blood-drop"
+          value={Math.round(parseFloat(officeHumidity.state) * 10) / 10}
+          suffix="%"
         />
       </Stack>
     </Stack>

@@ -1,7 +1,7 @@
 import { Stack } from '@components'
 import { useEntity } from '@hakit/core'
 import { Column1, Column2, Column3, TabColumn } from '@mobile'
-import { DmnModal, EntertainmentModal, SleepModal, ProjectModal, EstimateModal } from '@modals'
+import { DmnModal, EntertainmentModal, EstimateModal, ProjectModal, SleepModal } from '@modals'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
 
@@ -22,9 +22,8 @@ export const Mobile = () => {
 
   useEffect(() => {
     document.addEventListener('visibilitychange', updateVisibility)
+    setInterval(updateVisibility, 60000)
   }, [])
-
-  setInterval(updateVisibility, 60000)
 
   return (
     // setup for 1260x540 px (200% scaling of super light – to attach to the arm – xperia 10 V phone)

@@ -1,4 +1,4 @@
-import { Card, Stack } from '@components'
+import { Card, Stack, Txt } from '@components'
 import { colors } from '@constants.ts'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
@@ -92,8 +92,10 @@ export const CurrentProjectTimer = () => {
         progress={progressValue}
         color={afterExpiration ? (afterExpiration <= 60 ? colors.orange : colors.red) : undefined}
       >
-        {formatMinutes(timePassed)} {duration > 0 && `/ ${formatMinutes(duration)}`}
-        {process.env.NODE_ENV === 'development' && ` (${timePassedSeconds}/${durationSeconds})`}
+        <Txt size="lg">
+          {formatMinutes(timePassed)} {duration > 0 && `/ ${formatMinutes(duration)}`}
+          {process.env.NODE_ENV === 'development' && ` (${timePassedSeconds}/${durationSeconds})`}
+        </Txt>
       </Card>
       <Card.Icon
         icon="time-stopwatch"

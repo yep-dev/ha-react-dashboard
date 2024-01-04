@@ -9,8 +9,8 @@ export const DateTime = () => {
 
   return (
     <Card align="space-around">
-      <Txt size="lg">{dateString}</Txt>
-      <Txt weight="bold" size="lg">
+      <Txt size="xl">{dateString}</Txt>
+      <Txt weight="bold" size="xl">
         {time.state}
       </Txt>
     </Card>

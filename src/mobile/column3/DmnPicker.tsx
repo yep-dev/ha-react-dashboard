@@ -1,4 +1,4 @@
-import { Card } from '@components'
+import { Card, Txt } from '@components'
 import { useModal } from '@modals'
 
 export const DmnPicker = () => {
@@ -6,7 +6,7 @@ export const DmnPicker = () => {
 
   return (
     <Card size="xl" align="space-around" onClick={open}>
-      DMN
+      <Txt size="lg">DMN</Txt>
     </Card>
   )
 }
