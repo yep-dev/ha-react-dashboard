@@ -1,5 +1,12 @@
 import { Stack } from '@components'
-import { ProjectTimeline, SlotsTimeline, TimeScaleComponent } from '@stats'
+import { useDay } from '@hooks'
+import {
+  AlignedStats,
+  ProjectTimeline,
+  SlotAlignedTimeline,
+  SlotsTimeline,
+  TimeScaleComponent,
+} from '@stats'
 import { parseTime } from '@utils'
 import { addDays, differenceInMinutes, isAfter } from 'date-fns'
 
@@ -9,6 +16,7 @@ export type SensorData = {
 }
 
 export const Stats = () => {
+  const { isDay } = useDay()
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
 
   const times1 = {
@@ -20,8 +28,7 @@ export const Stats = () => {
     endTime: '06:00',
   }
 
-  const isNight = (now = new Date()) => now.getHours() >= 22 || now.getHours() < 7
-  const times = isNight() ? times2 : times1
+  const times = isDay ? times1 : times2
 
   const start = parseTime(times.startTime)
   let end = parseTime(times.endTime)
@@ -32,12 +39,25 @@ export const Stats = () => {
 
   return (
     // setup for 1920x550 px (200% scaling of 4k slim display)
-    <div style={{ width: 1920, height: 549, borderBottom: '1px solid white inset' }}>
+    <Stack
+      column
+      style={{
+        width: 1920,
+        height: 549,
+        borderBottom: '1px solid white inset',
+      }}
+      stretch={false}
+    >
       <Stack column>
         <TimeScaleComponent {...props} />
         <ProjectTimeline {...props} />
         <SlotsTimeline {...props} />
+        <SlotAlignedTimeline {...props} />
       </Stack>
-    </div>
+
+      <Stack align="start" style={{ marginTop: 12, flex: 1 }}>
+        <AlignedStats />
+      </Stack>
+    </Stack>
   )
 }

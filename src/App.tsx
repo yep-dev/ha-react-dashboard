@@ -1,7 +1,8 @@
 import { GlobalContext, GlobalData } from '@GlobalData'
 import { useEntity } from '@hakit/core'
-import { ModalsProvider } from '@modals'
+import { DayContext } from '@hooks.ts'
 import { Mobile } from '@mobile'
+import { ModalsProvider } from '@modals'
 import { Stats } from '@stats'
 import ky from 'ky'
 import { useEffect, useState } from 'react'
@@ -13,6 +14,7 @@ const pages = {
 
 const App = () => {
   const [globalData, setGlobalData] = useState<GlobalData>()
+  const [isDay, setIsDay] = useState(new Date().getHours() < 22 && new Date().getHours() > 7)
   const refreshTrigger = useEntity('input_datetime.trigger_dashboard_reload').state
 
   useEffect(() => {
@@ -40,9 +42,11 @@ const App = () => {
 
   return globalData ? (
     <GlobalContext.Provider value={globalData}>
-      <ModalsProvider>
-        <Component />
-      </ModalsProvider>
+      <DayContext.Provider value={{ isDay, setIsDay }}>
+        <ModalsProvider>
+          <Component />
+        </ModalsProvider>
+      </DayContext.Provider>
     </GlobalContext.Provider>
   ) : null
 }

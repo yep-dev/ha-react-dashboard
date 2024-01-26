@@ -5,5 +5,7 @@
 export * from './Stats'
 export * from './components/Gannt'
 export * from './components/TimeScale'
+export * from './info/AlignedStats'
 export * from './timelines/ProjectTimeline'
+export * from './timelines/SlotAlignedTimeline'
 export * from './timelines/SlotsTimeline'
