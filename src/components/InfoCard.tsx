@@ -1,13 +1,10 @@
+import { Card, Icon, Stack } from '@components'
 import { colors } from '@constants'
-import styled from '@emotion/styled'
-import { Card, Icon } from '@components'
-
-export const Container = styled(Card)<{ background: string }>`
-  background-color: ${({ background }) => background};
-`
 
 type Props = {
-  icon: string
+  children?: React.ReactNode
+  icon?: string
+  text?: string
   suffix?: string
   value: number
   green?: number
@@ -40,16 +37,19 @@ const getColor = (
   return colors.dark
 }
 
-export const InfoCard = ({ icon, suffix, value, green, orange, red, invert }: Props) => {
-  const background = getColor(value, green, orange, red, invert)
+export const InfoCard = ({ children, icon, suffix, value, green, orange, red, invert }: Props) => {
+  const color = getColor(value, green, orange, red, invert)
 
   return (
-    <Container gap={0} background={background} alignItems="center" align="center" size="sm">
-      <Icon name={icon} style={{ marginLeft: 4 }} />
-      <div>
-        {value}
-        {suffix}
-      </div>
-    </Container>
+    <Card gap={0} color={color} alignItems="center" align="center" size="sm">
+      {icon && <Icon name={icon} style={{ marginLeft: 4 }} />}
+      <Stack>
+        {children && <div style={{ textAlign: 'left', marginLeft: 8 }}>{children}</div>}
+        <div>
+          {value}
+          {suffix}
+        </div>
+      </Stack>
+    </Card>
   )
 }

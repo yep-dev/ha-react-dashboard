@@ -9,9 +9,9 @@ const Container = styled.div`
   width: 1920px;
 `
 
-const TimeSlot = styled.div<{ width: string }>`
+const TimeSlot = styled.div<{ width: string; size?: string }>`
   flex: 0 0 auto;
-  height: 40px;
+  height: ${({ size }) => (size === 'sm' ? '10px' : '40px')};
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -25,12 +25,14 @@ type GanttChartProps = {
   data: SensorData[]
   getColor(state: string): string | string[]
   duration: number
+  size?: 'md' | 'sm'
 }
 
 export const GanttChart: React.FC<GanttChartProps> = ({
   data,
   getColor,
   duration: totalDuration,
+  size,
 }) => {
   const totalWidth = 1920
 
@@ -48,11 +50,11 @@ export const GanttChart: React.FC<GanttChartProps> = ({
         const width = computeWidth(item, nextItem)
         const color = getColor(item.state)
 
-        console.log(color)
         return (
           <TimeSlot
             key={index}
             width={width}
+            size={size}
             style={
               Array.isArray(color)
                 ? {
@@ -63,7 +65,7 @@ export const GanttChart: React.FC<GanttChartProps> = ({
                   }
             }
           >
-            <SlotInner>{item.state}</SlotInner>
+            <SlotInner>{size !== 'sm' && item.state}</SlotInner>
           </TimeSlot>
         )
       })}

@@ -9,6 +9,7 @@ export const Sensors = () => {
   const tabCharging = useEntity('sensor.tab_battery_state')
   const officeTemperature = useEntity('sensor.sht_office_temperature')
   const officeHumidity = useEntity('sensor.sht_office_humidity')
+  const officeAbsolute = useEntity('sensor.sht_office_absolute')
 
   return (
     <Stack column>
@@ -54,8 +55,10 @@ export const Sensors = () => {
         />
         <InfoCard
           icon="blood-drop"
-          value={Math.round(parseFloat(officeHumidity.state) * 10) / 10}
-          suffix="%"
+          value={parseFloat(officeHumidity.state)}
+          suffix={`% / ${officeAbsolute.state}g`}
+          red={40}
+          green={55}
         />
       </Stack>
     </Stack>

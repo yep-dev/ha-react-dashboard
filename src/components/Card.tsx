@@ -2,9 +2,10 @@ import { Icon } from '@components'
 import { Stack, StackContext, StackProps } from '@components/Stack.tsx'
 import { colors } from '@constants'
 import styled from '@emotion/styled'
+import { HassEntityWithService } from '@hakit/core'
 import { useContext } from 'react'
 
-type CardProps = {
+export type CardProps = {
   onClick?: () => void
   active?: boolean
   color?: string
@@ -81,7 +82,7 @@ export const Card = ({
       disableRadius={radius}
       color={rest.color ?? color}
       active={active}
-      style={{ height, backgroundColor, ...style }}
+      style={{ minHeight: height, maxHeight: height, backgroundColor, ...style }}
       beta={beta}
       {...rest}
     >
@@ -90,6 +91,20 @@ export const Card = ({
     </StyledCard>
   )
 }
+
+const CardSwitch = ({
+  entity,
+  ...props
+}: CardProps & { entity: HassEntityWithService<'switch'> }) => (
+  <Card
+    onClick={() => {
+      entity.service.toggle()
+    }}
+    color={entity.state === 'on' ? colors.light : entity.state === 'off' ? undefined : colors.red}
+    {...props}
+  />
+)
+Card.Switch = CardSwitch
 
 const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
   <Card {...props}>

@@ -20,7 +20,6 @@ const StyledStack: FC<StackProps> = styled('div', {
     ![
       'radius',
       'column',
-      'stretch',
       'alignItems',
       'transparent',
       'disableRadius',
@@ -43,7 +42,7 @@ const StyledStack: FC<StackProps> = styled('div', {
   height: ${({ fullHeight }) => (fullHeight ? '100%' : 'auto')};
 
   & > div {
-    flex: 1;
+    ${({ stretch = true }) => stretch && 'flex: 1;'}
   }
 `
 export const StackContext = createContext<{ radius: boolean; color?: string }>({ radius: false })
