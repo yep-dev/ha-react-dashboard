@@ -1,5 +1,5 @@
+import { Card, Stack } from '@components'
 import { useEntity } from '@hakit/core'
-import { Card, IconLabel, Stack } from '@components'
 
 export const AirConditioner = () => {
   const ac = useEntity('climate.room_air_conditioner')
@@ -24,7 +24,8 @@ export const AirConditioner = () => {
 
   return (
     <Stack gap={0}>
-      <IconLabel onClick={turnOff} icon="temperature-snowflake-1" text="AC" />
+      {/*<IconLabel onClick={turnOff} icon="temperature-snowflake-1" text="AC" />*/}
+      <Card.IconLabel icon="temperature-snowflake-1" onClick={turnOff} />
       <Stack column>
         <Stack radius>
           {[22, 23, 24, 25].map((temperature) => (

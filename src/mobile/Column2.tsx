@@ -1,5 +1,5 @@
 import { Stack } from '@components'
-import { Notifications, Player, Sequences } from '@mobile'
+import { Notifications, Player, Portainer, Sequences } from '@mobile'
 
 export const Column2 = () => {
   return (
@@ -7,6 +7,7 @@ export const Column2 = () => {
       <Player />
       <Sequences />
       <Notifications />
+      <Portainer />
     </Stack.MobileColumn>
   )
 }

@@ -24,7 +24,7 @@ export const Notifications = () => {
   return (
     <Stack column>
       {notifications.map(({ name }) => (
-        <Card key={name}>{name}</Card>
+        <Card.Padded key={name}>{name}</Card.Padded>
       ))}
     </Stack>
   )

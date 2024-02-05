@@ -114,6 +114,18 @@ const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
 
 Card.Icon = CardIcon
 
+const CardIconLabel = ({ icon, ...props }: CardProps & { icon: string }) => (
+  <Card.Icon
+    icon={icon}
+    size="inherit"
+    color="transparent"
+    style={{ flex: 'none', margin: '0 6px', ...props.style }}
+    {...props}
+  />
+)
+
+Card.IconLabel = CardIconLabel
+
 const CardPadded = styled(Card)`
   padding: 0 16px;
 `

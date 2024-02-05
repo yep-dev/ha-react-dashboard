@@ -4,11 +4,7 @@ import { useHistoryStats } from '@hooks'
 import { GanttChart } from '@stats'
 import { useContext } from 'react'
 
-type Props = {
-  startTime: string
-  endTime: string
-  duration: number
-}
+type Props = { startTime: string; endTime: string; duration: number }
 
 export const ProjectTimeline = ({ startTime, endTime, duration }: Props) => {
   const { projectCategory } = useContext(GlobalContext).categories
@@ -16,7 +12,8 @@ export const ProjectTimeline = ({ startTime, endTime, duration }: Props) => {
   const data = useHistoryStats('input_select.project', startTime, endTime)
 
   const getColor = (state: string) => {
-    const category = projectCategory[state].toLowerCase() || 'default'
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    const category = (projectCategory[state] || 'default').toLowerCase()
     return categoryColors[category as keyof typeof categoryColors]
   }
 
