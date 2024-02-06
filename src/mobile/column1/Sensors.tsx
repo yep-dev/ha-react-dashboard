@@ -1,5 +1,5 @@
 import { InfoCard, Stack } from '@components'
-import { useEntity } from '@hakit/core'
+import { useEntity } from '@hooks'
 
 export const Sensors = () => {
   const bandBattery = useEntity('sensor.band_battery')

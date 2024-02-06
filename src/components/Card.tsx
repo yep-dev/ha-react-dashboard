@@ -4,6 +4,7 @@ import { colors } from '@constants'
 import styled from '@emotion/styled'
 import { HassEntityWithService } from '@hakit/core'
 import { useContext } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 
 export type CardProps = {
   onClick?: () => void
@@ -77,18 +78,26 @@ export const Card = ({
   const backgroundColor = rest.color ?? color ?? (active ? colors.light : colors.dark)
 
   return (
-    <StyledCard
-      onClick={handleClick}
-      disableRadius={radius}
-      color={rest.color ?? color}
-      active={active}
-      style={{ minHeight: height, maxHeight: height, backgroundColor, ...style }}
-      beta={beta}
-      {...rest}
+    <ErrorBoundary
+      fallback={
+        <StyledCard disableRadius={radius} color={colors.light}>
+          error
+        </StyledCard>
+      }
     >
-      {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}
-      {children}
-    </StyledCard>
+      <StyledCard
+        onClick={handleClick}
+        disableRadius={radius}
+        color={rest.color ?? color}
+        active={active}
+        style={{ minHeight: height, maxHeight: height, backgroundColor, ...style }}
+        beta={beta}
+        {...rest}
+      >
+        {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}
+        {children}
+      </StyledCard>
+    </ErrorBoundary>
   )
 }
 
