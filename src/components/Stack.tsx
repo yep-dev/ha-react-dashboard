@@ -24,6 +24,7 @@ const StyledStack: FC<StackProps> = styled('div', {
       'transparent',
       'disableRadius',
       'beta',
+      'wrap',
       'active',
       'stretch',
       'background',
