@@ -5,6 +5,7 @@
 export * from './Card'
 export * from './Icon'
 export * from './IconLabel'
+export * from './IncrementSelect'
 export * from './InfoCard'
 export * from './Modal'
 export * from './Stack'

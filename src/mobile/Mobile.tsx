@@ -27,7 +27,7 @@ export const Mobile = () => {
 
   return (
     // setup for 1260x540 px (200% scaling of super light – to attach to the arm – xperia 10 V phone)
-    <Stack gap={'0 10px'} align="space-around" alignItems="flex-start" wrap="wrap" stretch={false}>
+    <Stack gap={'0 8'} align="space-around" alignItems="flex-start" wrap="wrap" stretch={false}>
       <Column1 />
       <Column2 />
       {isSmallScreen && <TabColumn />}

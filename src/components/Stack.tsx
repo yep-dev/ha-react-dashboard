@@ -28,6 +28,7 @@ const StyledStack: FC<StackProps> = styled('div', {
       'stretch',
       'background',
       'fullWidth',
+      'gap',
       'fullHeight',
     ].includes(prop),
 })<StackProps>`
@@ -57,8 +58,8 @@ export const Stack = ({ children, radius, color, ...rest }: StackProps) => (
 )
 
 Stack.MobileColumn = styled(Stack)`
-  min-width: 417px;
-  max-width: 417px;
+  min-width: 414px;
+  max-width: 414px;
   min-height: 540px;
 
   & > div {
