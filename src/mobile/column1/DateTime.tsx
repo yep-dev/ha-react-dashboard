@@ -1,35 +1,40 @@
+import { useEffect, useState } from 'react'
 import { Card, Stack, Txt } from '@components'
 import { format } from 'date-fns'
 import { utcToZonedTime } from 'date-fns-tz'
 
 export const DateTime = () => {
-  const browserDateTime = new Date()
+  const [currentDate, setCurrentDate] = useState(new Date())
 
-  // todo: upgrade to date-fns 3.0 once -tz supports it and cleanup ignores
-  const timeZoneLosAngeles = 'America/Los_Angeles'
-  const zonedDateLosAngeles = utcToZonedTime(browserDateTime, timeZoneLosAngeles)
-  const timeStringLosAngeles = format(zonedDateLosAngeles, 'hh:mm a', {
-    // @ts-expect-error
-    timeZone: timeZoneLosAngeles,
-  })
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setCurrentDate(new Date())
+    }, 1000)
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [])
 
-  const timeZoneEastern = 'America/New_York'
-  const zonedDateEastern = utcToZonedTime(browserDateTime, timeZoneEastern)
-  // @ts-expect-error
-  const timeStringEastern = format(zonedDateEastern, 'hh:mm a', { timeZone: timeZoneEastern })
+  const getTimeString = (timeZone: string) => {
+    const zonedDate = utcToZonedTime(currentDate, timeZone)
+    return format(zonedDate, 'hh:mm a', {
+      // @ts-expect-error
+      timeZone,
+    })
+  }
 
   return (
     <Card align="space-around">
       <Stack>
-        <Txt size="xl">{format(browserDateTime, 'E d MMM')}</Txt>
+        <Txt size="xl">{format(currentDate, 'E d MMM')}</Txt>
       </Stack>
       <Stack alignItems="center">
         <Txt weight="bold" size="xl" style={{ marginRight: 16 }}>
-          {format(browserDateTime, 'HH:mm')}
+          {format(currentDate, 'HH:mm')}
         </Txt>
         <Stack column gap={0}>
-          <Txt size="sm"> {timeStringEastern}</Txt>
-          <Txt size="sm"> {timeStringLosAngeles}</Txt>
+          <Txt size="sm"> {getTimeString('America/New_York')}</Txt>
+          <Txt size="sm"> {getTimeString('America/Los_Angeles')}</Txt>
         </Stack>
       </Stack>
     </Card>
