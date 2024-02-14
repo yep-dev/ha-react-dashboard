@@ -6,18 +6,35 @@ import { HassEntityWithService } from '@hakit/core'
 import { useContext } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
+const widthPresets = {
+  '1/3': 123,
+}
+
 export type CardProps = {
   onClick?: () => void
-  active?: boolean
+  active?: boolean | null
   color?: string
   progress?: number
   secondClick?(): void
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'stretch' | 'inherit'
   beta?: boolean
+  width?: '1/3' | number
 } & StackProps
+
+const getWidth = (width?: keyof typeof widthPresets | number) => {
+  if (!width) {
+    return 'auto'
+  } else if (typeof width === 'number') {
+    return `${width}px`
+  } else if (width in widthPresets) {
+    return `${widthPresets[width]}px`
+  }
+}
 
 const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
   cursor: pointer;
+  min-width: ${({ width }) => getWidth(width)};
+  max-width: ${({ width }) => getWidth(width)};
   border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
   opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
   padding: 0 6px;
@@ -128,7 +145,7 @@ const CardIconLabel = ({ icon, ...props }: CardProps & { icon: string }) => (
     icon={icon}
     size="inherit"
     color="transparent"
-    style={{ flex: 'none', margin: '0 6px', ...props.style }}
+    style={{ flex: 'none', margin: '0 4px', ...props.style }}
     {...props}
   />
 )

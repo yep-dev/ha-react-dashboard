@@ -7,7 +7,6 @@ export const DateTime = () => {
 
   // todo: upgrade to date-fns 3.0 once -tz supports it and cleanup ignores
   const timeZoneLosAngeles = 'America/Los_Angeles'
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const zonedDateLosAngeles = utcToZonedTime(browserDateTime, timeZoneLosAngeles)
   const timeStringLosAngeles = format(zonedDateLosAngeles, 'hh:mm a', {
     // @ts-expect-error
@@ -15,7 +14,6 @@ export const DateTime = () => {
   })
 
   const timeZoneEastern = 'America/New_York'
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
   const zonedDateEastern = utcToZonedTime(browserDateTime, timeZoneEastern)
   // @ts-expect-error
   const timeStringEastern = format(zonedDateEastern, 'hh:mm a', { timeZone: timeZoneEastern })

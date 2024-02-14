@@ -43,5 +43,6 @@ module.exports = {
     "react/no-unknown-property": ['error', { ignore: ['css'] }],
     "@typescript-eslint/no-floating-promises": 0, 
     "@typescript-eslint/no-unsafe-enum-comparison": 0, // temporary
+    "@typescript-eslint/no-unsafe-call": 0,
   },
 }
