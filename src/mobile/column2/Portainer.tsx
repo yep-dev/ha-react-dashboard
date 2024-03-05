@@ -12,7 +12,7 @@ export const Portainer = () => {
 
   const fetchData = async () => {
     try {
-      const response = await ky.get('http://10.0.0.100:9441/containers').json<Response>()
+      const response = await ky.get('https://10.0.0.100:9441/containers').json<Response>()
       const transformedData = response
         .filter(
           (entity) =>
