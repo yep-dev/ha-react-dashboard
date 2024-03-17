@@ -2,7 +2,7 @@ import { Card, Stack } from '@components'
 import { useEntity } from '@hakit/core'
 
 export const AirConditioner = () => {
-  const ac = useEntity('climate.room_air_conditioner')
+  const ac = useEntity('climate.conditioner_office')
   const setTemperature = (temperature: number) => {
     ac.service.setTemperature({ temperature })
   }

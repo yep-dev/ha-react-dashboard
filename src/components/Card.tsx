@@ -3,6 +3,7 @@ import { Stack, StackContext, StackProps } from '@components/Stack.tsx'
 import { colors } from '@constants'
 import styled from '@emotion/styled'
 import { HassEntityWithService } from '@hakit/core'
+import { rgba } from 'polished'
 import { useContext } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
@@ -19,6 +20,9 @@ export type CardProps = {
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'stretch' | 'inherit'
   beta?: boolean
   width?: '1/3' | number
+  fill?: boolean
+  transparent?: boolean
+  outline?: boolean
 } & StackProps
 
 const getWidth = (width?: keyof typeof widthPresets | number) => {
@@ -41,6 +45,16 @@ const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
   flex: 1;
   position: relative;
   z-index: 0;
+  box-sizing: border-box;
+
+  ${({ radius }) =>
+    radius &&
+    `
+    box-sizing: border-box;
+    padding: 0;
+    gap: 0;
+    border-radius: 8px
+  `}
 `
 
 const ProgressBar = styled.div<{ progress: number; color: string }>`
@@ -67,9 +81,12 @@ export const Card = ({
   progress,
   style,
   beta,
+  outline,
   ...rest
 }: CardProps) => {
-  const { radius, color } = useContext(StackContext)
+  const { radius, color: contextColor } = useContext(StackContext)
+  const color = rest.color ?? contextColor
+
   const handleClick = () => {
     if (!beta) {
       if (active) {
@@ -92,7 +109,16 @@ export const Card = ({
     style = { ...style, flex: 1 }
   }
 
-  const backgroundColor = rest.color ?? color ?? (active ? colors.light : colors.dark)
+  let backgroundColor
+  if (rest.fill && color) {
+    backgroundColor = rgba(color || 'white', 0.25)
+  } else {
+    backgroundColor = rest.transparent ? 'transparent' : active ? colors.light : colors.dark
+  }
+
+  if (outline) {
+    console.log(outline, rest.color, color)
+  }
 
   return (
     <ErrorBoundary
@@ -105,9 +131,16 @@ export const Card = ({
       <StyledCard
         onClick={handleClick}
         disableRadius={radius}
-        color={rest.color ?? color}
+        color={color}
         active={active}
-        style={{ minHeight: height, maxHeight: height, backgroundColor, ...style }}
+        style={{
+          minHeight: height,
+          maxHeight: height,
+          backgroundColor,
+          outline: outline && color ? `1px solid ${color}` : 'none',
+          border: !outline && color ? `2px solid ${color}` : 'none',
+          ...style,
+        }}
         beta={beta}
         {...rest}
       >
@@ -126,7 +159,7 @@ const CardSwitch = ({
     onClick={() => {
       entity.service.toggle()
     }}
-    color={entity.state === 'on' ? colors.light : entity.state === 'off' ? undefined : colors.red}
+    color={entity.state === 'on' ? colors.light : undefined}
     {...props}
   />
 )
@@ -144,8 +177,8 @@ const CardIconLabel = ({ icon, ...props }: CardProps & { icon: string }) => (
   <Card.Icon
     icon={icon}
     size="inherit"
-    color="transparent"
-    style={{ flex: 'none', margin: '0 4px', ...props.style }}
+    style={{ flex: 'none', margin: '0 4px', height: 'auto', ...props.style }}
+    transparent
     {...props}
   />
 )
@@ -157,3 +190,7 @@ const CardPadded = styled(Card)`
 `
 
 Card.Padded = CardPadded
+
+const CardRadius = (props: CardProps) => <Card radius stretch size="inherit" {...props} />
+
+Card.Radius = CardRadius

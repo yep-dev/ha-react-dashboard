@@ -8,12 +8,12 @@ type Props = {
 export const IconLabel = ({ icon, onClick }: Props) => {
   return (
     <Card
-      color="transparent"
       size="inherit"
       gap={0}
       align="center"
       onClick={onClick}
       style={{ alignItems: 'center', flex: 'none' }}
+      transparent
     >
       <Icon name={icon} />
       {/*{text && <Txt size="sm">{text}</Txt>}*/}

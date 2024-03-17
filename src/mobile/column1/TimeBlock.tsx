@@ -28,7 +28,7 @@ export const TimeBlock = () => {
   const category = textToCamel(slot) as ICategory
 
   return (
-    <Card color={categoryColors[category]} {...cardProps}>
+    <Card color={categoryColors[category]} fill {...cardProps}>
       <Txt weight="bold">{slot}</Txt>
       <Txt>
         {startTime} - {endTime}

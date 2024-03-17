@@ -15,7 +15,9 @@ export const CurrentProject = () => {
         size="xl"
         align="space-around"
         color={categoryColors[category.toLowerCase() as keyof typeof categoryColors]}
+        style={{ borderWidth: 3 }}
         onClick={open}
+        fill
       >
         {task || project}
       </Card>

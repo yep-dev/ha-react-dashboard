@@ -19,7 +19,7 @@ const getColor = (
   orange?: number,
   red?: number,
   invert?: boolean,
-): string => {
+): string | undefined => {
   if (green !== undefined && value === green) return colors.green
   if (orange !== undefined && value === orange) return colors.orange
   if (red !== undefined && value === red) return colors.red
@@ -34,7 +34,7 @@ const getColor = (
     if (orange !== undefined && value < orange) return colors.orange
   }
 
-  return colors.dark
+  return undefined
 }
 
 export const InfoCard = ({ children, icon, suffix, value, green, orange, red, invert }: Props) => {

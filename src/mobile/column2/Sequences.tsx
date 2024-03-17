@@ -16,7 +16,7 @@ const Sequence = ({ name }: { name: string }) => {
 
   return (
     sequence.state !== 'none' && (
-      <Card.Padded onClick={handleClick} style={{ border: `2px solid ${colors.green}` }} size="lg">
+      <Card.Padded onClick={handleClick} size="lg" color={colors.green}>
         <div>
           <Txt size="lg">{sequence.state.split(' | ')[0]}</Txt>
           <Txt opacity="low" style={{ marginLeft: 4 }}>

@@ -80,7 +80,7 @@ export const CurrentProjectTimer = () => {
       : timePassedSeconds / durationSeconds
 
   return (
-    <Stack radius>
+    <Stack>
       <Card
         size="xl"
         align="space-around"
@@ -91,6 +91,8 @@ export const CurrentProjectTimer = () => {
         }}
         progress={progressValue}
         color={afterExpiration ? (afterExpiration <= 60 ? colors.orange : colors.red) : undefined}
+        fill
+        radius
       >
         <Txt size="lg">
           {formatMinutes(timePassed)} {duration > 0 && `/ ${formatMinutes(duration)}`}
@@ -103,6 +105,7 @@ export const CurrentProjectTimer = () => {
         style={{ maxWidth: 100 }}
         onClick={open}
         beta={project.state === 'Idling'}
+        radius
       />
     </Stack>
   )
