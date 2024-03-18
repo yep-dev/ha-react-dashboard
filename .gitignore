@@ -28,6 +28,8 @@ supported-types.d.ts
 ProjectModal.tsx
 EntertainmentModal.tsx
 DmnModal.tsx
+DistractionModal.tsx
 
+data/
 
 .envrc

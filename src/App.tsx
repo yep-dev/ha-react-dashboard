@@ -40,6 +40,9 @@ const App = () => {
   const queryParams = new URLSearchParams(window.location.search)
   const Component = pages[(queryParams.get('page') ?? 'mobile') as keyof typeof pages]
 
+  // @ts-expect-error
+  window.global = globalData
+
   return globalData ? (
     <GlobalContext.Provider value={globalData}>
       <DayContext.Provider value={{ isDay, setIsDay }}>

@@ -13,7 +13,7 @@ export const Project = ({ name, color, size = 'stretch', ...props }: Props) => {
   const select = useEntity('input_select.project')
 
   const handleClick = () => {
-    open()
+    open({ name })
     select.service.selectOption({ option: name })
   }
 

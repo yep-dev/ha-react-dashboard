@@ -14,7 +14,7 @@ export const categoryColors = {
   mind: '#C7AF15',
   away: '#566613',
   sleep: '#D92C2B',
-  idling: '#525266',
+  idling: '#414148',
   tasks: '#991101',
   exploring: '#1c966a',
 }
@@ -22,7 +22,7 @@ export const categoryColors = {
 export const colors = {
   black: '#000',
   white: '#fff',
-  dark: '#202020',
+  dark: '#1a1a1a',
   light: categoryColors.idling,
   green: categoryColors.research,
   yellow: categoryColors.mind,

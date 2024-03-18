@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react'
 type ModalData = {
   project?: object
   projectEntertainment?: object
-  estimate?: object
+  estimate?: { name: string }
   dmn?: object
   sleep?: object
 }
@@ -45,21 +45,28 @@ export const ModalsProvider = ({ children }: Props) => {
   )
 }
 
-export const useModal = (modalName: ModalName) => {
+export const useModal = <T extends ModalName>(modalName: T) => {
   const context = useContext(ModalContext)
   if (!context) {
     throw new Error('useModal must be used within a ModalProvider')
   }
   const { modalsData, selectedData, closeModal, openModal } = context
 
-  const modal = modalsData[modalName]
+  const modalData = modalsData[modalName]
+  const selectedModalData = selectedData[modalName]
 
   const open = (newData?: object) => {
     openModal(modalName, newData)
   }
-  const close = (selectedData = {}) => {
+  const close = (selectedData: object = {}) => {
     closeModal(modalName, selectedData)
   }
 
-  return { isOpen: modal !== undefined, modal, selected: selectedData[modalName], open, close }
+  return {
+    isOpen: modalData !== undefined,
+    modal: modalData,
+    selected: selectedModalData,
+    open,
+    close,
+  }
 }
