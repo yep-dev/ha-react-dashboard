@@ -87,15 +87,7 @@ export const Card = ({
   const { radius, color: contextColor } = useContext(StackContext)
   const color = rest.color ?? contextColor
 
-  const handleClick = () => {
-    if (!beta) {
-      if (active) {
-        secondClick?.()
-      } else {
-        onClick?.()
-      }
-    }
-  }
+  const handleClick = beta ? undefined : active ? secondClick : onClick
 
   const sizeToHeightMap = {
     inherit: 'inherit',
@@ -114,10 +106,6 @@ export const Card = ({
     backgroundColor = rgba(color || 'white', 0.25)
   } else {
     backgroundColor = rest.transparent ? 'transparent' : active ? colors.light : colors.dark
-  }
-
-  if (outline) {
-    console.log(outline, rest.color, color)
   }
 
   return (
@@ -190,7 +178,3 @@ const CardPadded = styled(Card)`
 `
 
 Card.Padded = CardPadded
-
-const CardRadius = (props: CardProps) => <Card radius stretch size="inherit" {...props} />
-
-Card.Radius = CardRadius

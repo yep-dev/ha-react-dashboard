@@ -74,3 +74,12 @@ Stack.MobileColumn.defaultProps = {
   align: 'flex-start',
   gap: 8,
 }
+
+const StackOutlined = ({ style, ...props }: StackProps) => (
+  <Stack
+    radius
+    style={{ border: `2px solid ${props.color}`, boxSizing: 'border-box', gap: 0, ...style }}
+    {...props}
+  />
+)
+Stack.Outlined = StackOutlined
