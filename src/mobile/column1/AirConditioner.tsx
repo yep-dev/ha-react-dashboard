@@ -1,8 +1,9 @@
 import { Card, Stack } from '@components'
-import { useEntity } from '@hakit/core'
+import { useEntity } from '@hooks'
 
 export const AirConditioner = () => {
   const ac = useEntity('climate.conditioner_office')
+  const heating = useEntity('input_boolean.heating').bool
   const setTemperature = (temperature: number) => {
     ac.service.setTemperature({ temperature })
   }
@@ -22,13 +23,15 @@ export const AirConditioner = () => {
     ac.service.setFanMode({ fan_mode: fanMode })
   }
 
+  const temps = heating ? [25, 26, 27, 30] : [22, 23, 24, 25]
+
   return (
     <Stack gap={0}>
       {/*<IconLabel onClick={turnOff} icon="temperature-snowflake-1" text="AC" />*/}
       <Card.IconLabel icon="temperature-snowflake-1" onClick={turnOff} />
       <Stack column>
         <Stack radius>
-          {[22, 23, 24, 25].map((temperature) => (
+          {temps.map((temperature) => (
             <Card
               onClick={() => {
                 setTemperature(temperature)

@@ -90,9 +90,9 @@ export const Player = () => {
             player.service.repeatSet({ repeat: 'off' })
           }}
         />
-        <Card.Icon icon="audio-file-search" beta />
-        <Card.Icon icon="playlist-repeat" beta />
-        <Card.Icon icon="audio-book-volume-high" beta />
+        <Card.Icon icon="audio-file-search" disabled />
+        <Card.Icon icon="playlist-repeat" disabled />
+        <Card.Icon icon="audio-book-volume-high" disabled />
       </Stack>
     </Stack>
   )

@@ -101,7 +101,7 @@ export function useEntity<E extends EntityName, O extends UseEntityOptions = Use
 
   // Define your additional properties
   const additionalData: AdditionalProperties = {
-    number: parseInt(originalData?.state ?? ''),
+    number: parseFloat(originalData?.state ?? ''),
     bool: originalData?.state === 'on' ? true : originalData?.state === 'off' ? false : null,
   }
 

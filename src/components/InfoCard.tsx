@@ -1,4 +1,4 @@
-import { Card, Icon, Stack } from '@components'
+import { Card, CardProps, Icon, Stack } from '@components'
 import { colors } from '@constants'
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
   orange?: number
   red?: number
   invert?: boolean
-}
+} & Pick<CardProps, 'width' | 'align'>
 
 const getColor = (
   value: number,
@@ -37,18 +37,27 @@ const getColor = (
   return undefined
 }
 
-export const InfoCard = ({ children, icon, suffix, value, green, orange, red, invert }: Props) => {
+export const InfoCard = ({
+  children,
+  icon,
+  suffix,
+  value,
+  green,
+  orange,
+  red,
+  invert,
+  align,
+  width,
+}: Props) => {
   const color = getColor(value, green, orange, red, invert)
 
   return (
-    <Card gap={0} color={color} alignItems="center" align="center" size="sm">
+    <Card gap={0} color={color} alignItems="center" align="center" size="sm" width={width}>
       {icon && <Icon name={icon} style={{ marginLeft: 4 }} />}
-      <Stack>
-        {children && <div style={{ textAlign: 'left', marginLeft: 8 }}>{children}</div>}
-        <div>
-          {value}
-          {suffix}
-        </div>
+      <Stack align={align}>
+        {/*{children && <div style={{ textAlign: 'left', marginLeft: 8 }}>{children}</div>}*/}
+        {children ?? value}
+        {suffix}
       </Stack>
     </Card>
   )

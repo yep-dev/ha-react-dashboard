@@ -1,5 +1,5 @@
 import { Stack } from '@components'
-import { AirConditioner, Boiler, DateTime, Light, Sensors, TimeBlock } from '@mobile'
+import { AirConditioner, Battery, Boiler, DateTime, Energy, Sensors, TimeBlock } from '@mobile'
 
 export const Column1 = () => {
   return (
@@ -8,10 +8,9 @@ export const Column1 = () => {
       <TimeBlock />
       <AirConditioner />
       <Boiler />
-      <Light />
-      <Stack>
-        <Sensors />
-      </Stack>
+      <Battery />
+      <Sensors />
+      <Energy />
     </Stack.MobileColumn>
   )
 }

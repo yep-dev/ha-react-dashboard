@@ -1,5 +1,6 @@
 import { Card, Stack, Txt } from '@components'
 import { colors } from '@constants.ts'
+import { estimate } from '@data'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
 import { formatMinutes } from '@utils'
@@ -33,7 +34,7 @@ export const CurrentProjectTimer = () => {
   useEffect(() => {
     const ws = new WebSocket('wss://10.0.0.100:6400/ws/marvin')
     ws.onmessage = () => {
-      open()
+      open({ name: 'Tech' })
     }
     return () => {
       ws.close()
@@ -103,8 +104,11 @@ export const CurrentProjectTimer = () => {
         icon="time-stopwatch"
         size="xl"
         style={{ maxWidth: 100 }}
-        onClick={open}
-        beta={project.state === 'Idling'}
+        onClick={() => {
+          console.log(Object.keys(estimate).includes(project.state) ? project.state : category)
+          open({ name: Object.keys(estimate).includes(project.state) ? project.state : category })
+        }}
+        disabled={project.state === 'Idling'}
         radius
       />
     </Stack>

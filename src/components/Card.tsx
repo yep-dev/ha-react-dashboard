@@ -9,6 +9,7 @@ import { ErrorBoundary } from 'react-error-boundary'
 
 const widthPresets = {
   '1/3': 123,
+  '1/4': 100,
 }
 
 export type CardProps = {
@@ -18,8 +19,8 @@ export type CardProps = {
   progress?: number
   secondClick?(): void
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'stretch' | 'inherit'
-  beta?: boolean
-  width?: '1/3' | number
+  disabled?: boolean
+  width?: '1/3' | '1/4' | number
   fill?: boolean
   transparent?: boolean
   outline?: boolean
@@ -40,7 +41,7 @@ const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
   min-width: ${({ width }) => getWidth(width)};
   max-width: ${({ width }) => getWidth(width)};
   border-radius: ${({ disableRadius }) => (disableRadius ? 0 : 8)}px;
-  opacity: ${({ beta = false }) => (beta ? 0.4 : 1)};
+  opacity: ${({ disabled = false }) => (disabled ? 0.4 : 1)};
   padding: 0 6px;
   flex: 1;
   position: relative;
@@ -80,14 +81,14 @@ export const Card = ({
   size,
   progress,
   style,
-  beta,
+  disabled,
   outline,
   ...rest
 }: CardProps) => {
   const { radius, color: contextColor } = useContext(StackContext)
   const color = rest.color ?? contextColor
 
-  const handleClick = beta ? undefined : active ? secondClick : onClick
+  const handleClick = disabled ? undefined : active ? secondClick : onClick
 
   const sizeToHeightMap = {
     inherit: 'inherit',
@@ -129,7 +130,7 @@ export const Card = ({
           border: !outline && color ? `2px solid ${color}` : 'none',
           ...style,
         }}
-        beta={beta}
+        disabled={disabled}
         {...rest}
       >
         {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}

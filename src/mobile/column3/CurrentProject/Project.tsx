@@ -10,11 +10,13 @@ type Props = {
 
 export const Project = ({ name, color, size = 'stretch', ...props }: Props) => {
   const { open } = useModal('estimate')
-  const select = useEntity('input_select.project')
+  const project = useEntity('input_select.project')
+  const task = useEntity('input_text.task')
 
   const handleClick = () => {
     open({ name })
-    select.service.selectOption({ option: name })
+    project.service.selectOption({ option: name })
+    task.service.setValue({ value: '' })
   }
 
   return (
