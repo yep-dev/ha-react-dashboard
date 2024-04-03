@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { createContext, CSSProperties, FC } from 'react'
+import { createContext, CSSProperties, FC, useMemo } from 'react'
 
 export type StackProps = {
   gap?: number | string
@@ -51,13 +51,16 @@ const StyledStack: FC<StackProps> = styled('div', {
 `
 export const StackContext = createContext<{ radius: boolean; color?: string }>({ radius: false })
 
-export const Stack = ({ children, radius, color, ...rest }: StackProps) => (
-  <StackContext.Provider value={{ radius: radius !== undefined, color }}>
-    <StyledStack radius={radius} {...rest}>
-      {children}
-    </StyledStack>
-  </StackContext.Provider>
-)
+export const Stack = ({ children, radius, color, ...rest }: StackProps) => {
+  const context = useMemo(() => ({ radius: radius !== undefined, color }), [radius, color])
+  return (
+    <StackContext.Provider value={context}>
+      <StyledStack radius={radius} {...rest}>
+        {children}
+      </StyledStack>
+    </StackContext.Provider>
+  )
+}
 
 Stack.MobileColumn = styled(Stack)`
   min-width: 414px;

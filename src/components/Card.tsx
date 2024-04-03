@@ -4,7 +4,7 @@ import { colors } from '@constants'
 import styled from '@emotion/styled'
 import { HassEntityWithService } from '@hakit/core'
 import { rgba } from 'polished'
-import { useContext } from 'react'
+import { useContext, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 const widthPresets = {
@@ -57,6 +57,13 @@ const StyledCard = styled(Stack)<CardProps & { disableRadius: boolean }>`
     border-radius: 8px
   `}
 `
+const sizeToHeightMap = {
+  inherit: 'inherit',
+  sm: 40,
+  md: 50,
+  lg: 60,
+  xl: 80,
+}
 
 const ProgressBar = styled.div<{ progress: number; color: string }>`
   position: absolute;
@@ -80,7 +87,7 @@ export const Card = ({
   children,
   size,
   progress,
-  style,
+  style: incomingStyle,
   disabled,
   outline,
   ...rest
@@ -88,26 +95,34 @@ export const Card = ({
   const { radius, color: contextColor } = useContext(StackContext)
   const color = rest.color ?? contextColor
 
-  const handleClick = disabled ? undefined : active ? secondClick : onClick
+  const handleClick = useMemo(
+    () => (disabled ? undefined : active ? secondClick : onClick),
+    [active, disabled, onClick, secondClick],
+  )
 
-  const sizeToHeightMap = {
-    inherit: 'inherit',
-    sm: 40,
-    md: 50,
-    lg: 60,
-    xl: 80,
-  }
-  const height = size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined
-  if (size === 'stretch') {
-    style = { ...style, flex: 1 }
-  }
-
-  let backgroundColor
-  if (rest.fill && color) {
-    backgroundColor = rgba(color || 'white', 0.25)
-  } else {
-    backgroundColor = rest.transparent ? 'transparent' : active ? colors.light : colors.dark
-  }
+  const height = useMemo(
+    () => (size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined),
+    [size],
+  )
+  const backgroundColor = useMemo(() => {
+    if (rest.fill && color) {
+      return rgba(color, 0.25)
+    } else {
+      return rest.transparent ? 'transparent' : active ? colors.light : colors.dark
+    }
+  }, [rest.fill, color, rest.transparent, active])
+  const style = useMemo(
+    () => ({
+      ...incomingStyle,
+      flex: size === 'stretch' ? 1 : undefined,
+      minHeight: height,
+      maxHeight: height,
+      backgroundColor,
+      outline: outline && color ? `1px solid ${color}` : 'none',
+      border: !outline && color ? `2px solid ${color}` : 'none',
+    }),
+    [incomingStyle, backgroundColor, size, height, color, outline],
+  )
 
   return (
     <ErrorBoundary
@@ -122,14 +137,7 @@ export const Card = ({
         disableRadius={radius}
         color={color}
         active={active}
-        style={{
-          minHeight: height,
-          maxHeight: height,
-          backgroundColor,
-          outline: outline && color ? `1px solid ${color}` : 'none',
-          border: !outline && color ? `2px solid ${color}` : 'none',
-          ...style,
-        }}
+        style={style}
         disabled={disabled}
         {...rest}
       >
@@ -161,18 +169,6 @@ const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
 )
 
 Card.Icon = CardIcon
-
-const CardIconLabel = ({ icon, ...props }: CardProps & { icon: string }) => (
-  <Card.Icon
-    icon={icon}
-    size="inherit"
-    style={{ flex: 'none', margin: '0 4px', height: 'auto', ...props.style }}
-    transparent
-    {...props}
-  />
-)
-
-Card.IconLabel = CardIconLabel
 
 const CardPadded = styled(Card)`
   padding: 0 16px;

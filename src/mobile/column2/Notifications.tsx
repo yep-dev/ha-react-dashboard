@@ -7,7 +7,7 @@ type Data = {
 }
 
 export const Notifications = () => {
-  const [notifications, setNotifications] = useState<{[key:string]: Data}>({})
+  const [notifications, setNotifications] = useState<Record<string, Data>>({})
 
   useEffect(() => {
     const ws = new WebSocket('wss://10.0.0.100:6400/ws/notifications?initial=true')
@@ -21,7 +21,7 @@ export const Notifications = () => {
 
   return (
     <Stack column>
-      {Object.entries(notifications).map(([name, data]) => (
+      {Object.keys(notifications).map((name) => (
         <Notification name={name} key={name} color={colors.green} />
       ))}
     </Stack>

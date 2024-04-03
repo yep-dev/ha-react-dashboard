@@ -1,3 +1,4 @@
+import './wdyr'
 import { GlobalContext, GlobalData } from '@GlobalData'
 import { useEntity } from '@hakit/core'
 import { DayContext } from '@hooks.ts'

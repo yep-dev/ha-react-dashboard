@@ -16,7 +16,7 @@ export const CurrentProject = () => {
         align="space-around"
         color={categoryColors[category.toLowerCase() as keyof typeof categoryColors]}
         style={{ borderWidth: 3 }}
-        onClick={project  === 'sleepy' ? undefined : open}
+        onClick={project === 'sleepy' ? undefined : open}
         fill
       >
         {task || project}

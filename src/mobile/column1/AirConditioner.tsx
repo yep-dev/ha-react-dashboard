@@ -1,4 +1,4 @@
-import { Card, Stack } from '@components'
+import { Card, Icon, Stack } from '@components'
 import { useEntity } from '@hooks'
 
 export const AirConditioner = () => {
@@ -28,7 +28,11 @@ export const AirConditioner = () => {
   return (
     <Stack gap={0}>
       {/*<IconLabel onClick={turnOff} icon="temperature-snowflake-1" text="AC" />*/}
-      <Card.IconLabel icon="temperature-snowflake-1" onClick={turnOff} />
+      <Icon
+        name="temperature-snowflake-1"
+        onClick={turnOff}
+        style={{ alignSelf: 'center', margin: '0 6px' }}
+      />
       <Stack column>
         <Stack radius>
           {temps.map((temperature) => (
