@@ -16,7 +16,6 @@ export type CardProps = {
   onClick?: () => void
   active?: boolean | null
   color?: string
-  progress?: number
   secondClick?(): void
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'stretch' | 'inherit'
   disabled?: boolean
@@ -64,18 +63,6 @@ const sizeToHeightMap = {
   lg: 60,
   xl: 80,
 }
-
-const ProgressBar = styled.div<{ progress: number; color: string }>`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 100%;
-  background-color: ${({ color }) => color};
-  width: ${({ progress }) => `${progress * 100}%`};
-  z-index: -1;
-  transition: width 1s ease;
-`
-
 StyledCard.defaultProps = {
   alignItems: 'center',
 }
@@ -86,7 +73,6 @@ export const Card = ({
   secondClick,
   children,
   size,
-  progress,
   style: incomingStyle,
   disabled,
   outline,
@@ -141,7 +127,6 @@ export const Card = ({
         disabled={disabled}
         {...rest}
       >
-        {!!progress && progress < 1 && <ProgressBar progress={progress} color={colors.light} />}
         {children}
       </StyledCard>
     </ErrorBoundary>

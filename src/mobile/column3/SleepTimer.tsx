@@ -31,7 +31,7 @@ export const SleepTimer = () => {
       >
         {formatMinutes(timePassed)} / {formatMinutes(duration)}
       </Card>
-      <Card.Icon icon="time-stopwatch" size="xl" style={{ maxWidth: 100 }} onClick={open} />
+      <Card.Icon icon="time-stopwatch" size="xl" width={100} onClick={open} />
     </Stack>
   )
 }

@@ -7,7 +7,7 @@ const Column = styled(Stack.MobileColumn)`
   min-height: 514px;
 `
 
-export const TabColumn = () => {
+export const Column4 = () => {
   const printer = useEntity('switch.printer_power')
 
   return (

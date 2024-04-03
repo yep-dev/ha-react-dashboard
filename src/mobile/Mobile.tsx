@@ -1,6 +1,6 @@
 import { Stack } from '@components'
 import { useEntity } from '@hakit/core'
-import { Column1, Column2, Column3, TabColumn } from '@mobile'
+import { Column1, Column2, Column3, Column4 } from '@mobile'
 import { DmnModal, EntertainmentModal, EstimateModal, ProjectModal, SleepModal } from '@modals'
 import { useEffect } from 'react'
 import { useMedia } from 'react-use'
@@ -30,7 +30,7 @@ export const Mobile = () => {
     <Stack gap={'0 8'} align="space-around" alignItems="flex-start" wrap="wrap" stretch={false}>
       <Column1 />
       <Column2 />
-      {isSmallScreen && <TabColumn />}
+      {isSmallScreen && <Column4 />}
       <Column3 />
       <ProjectModal />
       <EntertainmentModal />

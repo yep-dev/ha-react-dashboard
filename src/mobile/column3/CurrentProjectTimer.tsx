@@ -1,11 +1,12 @@
 import { Card, Stack, Txt } from '@components'
+import { CardProgress } from '@components/CardProgress.tsx'
 import { colors } from '@constants.ts'
 import { estimate } from '@data'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
 import { formatMinutes } from '@utils'
 import { differenceInSeconds, isAfter } from 'date-fns'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDebounce } from 'react-use'
 
 export const CurrentProjectTimer = () => {
@@ -80,16 +81,18 @@ export const CurrentProjectTimer = () => {
       ? afterExpiration / 60
       : timePassedSeconds / durationSeconds
 
+  const handleClick = useCallback(() => {
+    if (project.state !== 'Idling') {
+      project.service.selectOption({ option: 'Idling' })
+    }
+  }, [project.service, project.state])
+
   return (
     <Stack>
-      <Card
+      <CardProgress
         size="xl"
         align="space-around"
-        onClick={() => {
-          if (project.state !== 'Idling') {
-            project.service.selectOption({ option: 'Idling' })
-          }
-        }}
+        onClick={handleClick}
         progress={progressValue}
         color={afterExpiration ? (afterExpiration <= 60 ? colors.orange : colors.red) : undefined}
         fill
@@ -99,13 +102,12 @@ export const CurrentProjectTimer = () => {
           {formatMinutes(timePassed)} {duration > 0 && `/ ${formatMinutes(duration)}`}
           {process.env.NODE_ENV === 'development' && ` (${timePassedSeconds}/${durationSeconds})`}
         </Txt>
-      </Card>
+      </CardProgress>
       <Card.Icon
         icon="time-stopwatch"
         size="xl"
-        style={{ maxWidth: 100 }}
+        width={100}
         onClick={() => {
-          console.log(Object.keys(estimate).includes(project.state) ? project.state : category)
           open({ name: Object.keys(estimate).includes(project.state) ? project.state : category })
         }}
         disabled={project.state === 'Idling'}

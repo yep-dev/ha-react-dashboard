@@ -48,7 +48,7 @@ export const IncrementSelect = ({
     <>
       <Card.Icon
         icon="subtract"
-        style={{ maxWidth: 45 }}
+        width={45}
         onTouchStart={() => {
           handleTouchStart('decrement')
         }}
@@ -57,10 +57,10 @@ export const IncrementSelect = ({
           handleValueChange(-1)
         }}
       />
-      <Card style={{ maxWidth: 74 }}>{children}</Card>
+      <Card width={74}>{children}</Card>
       <Card.Icon
         icon="add"
-        style={{ maxWidth: 45 }}
+        width={45}
         onTouchStart={() => {
           handleTouchStart('increment')
         }}

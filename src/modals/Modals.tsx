@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useMemo, useState } from 'react'
 
 type ModalData = {
   project?: object
@@ -38,11 +38,12 @@ export const ModalsProvider = ({ children }: Props) => {
     })
   }
 
-  return (
-    <ModalContext.Provider value={{ modalsData, selectedData, openModal, closeModal }}>
-      {children}
-    </ModalContext.Provider>
+  const value = useMemo(
+    () => ({ modalsData, selectedData, openModal, closeModal }),
+    [modalsData, selectedData],
   )
+
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
 }
 
 export const useModal = <T extends ModalName>(modalName: T) => {

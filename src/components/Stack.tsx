@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import React from 'react'
 import { createContext, CSSProperties, FC, useMemo } from 'react'
 
 export type StackProps = {
