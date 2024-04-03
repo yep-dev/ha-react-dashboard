@@ -1,4 +1,4 @@
-import { Card, Icon, Txt } from '@components'
+import { Notification } from '@components'
 import { colors } from '@constants'
 import { EntityName, HassEntityWithService, useEntity } from '@hakit/core'
 import { useRest } from '@hooks'
@@ -9,22 +9,17 @@ const Sequence = ({ name }: { name: string }) => {
   const check = flags.includes('check')
 
   const handleClick = () => {
-    if (check) {
-      sequence.service.selectNext()
-    }
+    sequence.service.selectNext()
   }
 
   return (
     sequence.state !== 'none' && (
-      <Card.Padded onClick={handleClick} size="lg" color={colors.green}>
-        <div>
-          <Txt size="lg">{sequence.state.split(' | ')[0]}</Txt>
-          <Txt opacity="low" style={{ marginLeft: 4 }}>
-            {name.split('sequence_')[1]}
-          </Txt>
-        </div>
-        {check && <Icon name="check-2" />}
-      </Card.Padded>
+      <Notification
+        name={sequence.state.split(' | ')[0]}
+        description={name.split('sequence_')[1]}
+        color={colors.green}
+        onClick={check ? handleClick : undefined}
+      />
     )
   )
 }

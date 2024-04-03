@@ -1,21 +1,19 @@
-import { Card, Stack } from '@components'
+import { Notification, Stack } from '@components'
+import { colors } from '@constants'
 import { useEffect, useState } from 'react'
 
-type Notification = {
-  name: string
+type Data = {
   priority: number
 }
 
 export const Notifications = () => {
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [notifications, setNotifications] = useState<{[key:string]: Data}>({})
 
   useEffect(() => {
-    const ws = new WebSocket('wss://10.0.0.100:6400/ws/notifications')
-
+    const ws = new WebSocket('wss://10.0.0.100:6400/ws/notifications?initial=true')
     ws.onmessage = (event) => {
       setNotifications(JSON.parse(event.data))
     }
-
     return () => {
       ws.close()
     }
@@ -23,8 +21,8 @@ export const Notifications = () => {
 
   return (
     <Stack column>
-      {notifications.map(({ name }) => (
-        <Card.Padded key={name}>{name}</Card.Padded>
+      {Object.entries(notifications).map(([name, data]) => (
+        <Notification name={name} key={name} color={colors.green} />
       ))}
     </Stack>
   )
