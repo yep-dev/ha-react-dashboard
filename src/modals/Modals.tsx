@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState } from 'react'
+import React, { createContext, useCallback, useContext, useMemo, useState } from 'react'
 
 type ModalData = {
   project?: object
@@ -26,17 +26,17 @@ export const ModalsProvider = ({ children }: Props) => {
   const [modalsData, setModalsData] = useState<ModalData>({}) // data for open modal, set key = open
   const [selectedData, setSelectedData] = useState<ModalData>({}) // data from selecting option, saving last one
 
-  const openModal = (name: string, data: object | undefined) => {
+  const openModal = useCallback((name: string, data: object | undefined) => {
     setModalsData((prev) => ({ ...prev, [name]: data ?? {} }))
-  }
+  }, [])
 
-  const closeModal = (name: ModalName, selectedData?: object) => {
+  const closeModal = useCallback((name: ModalName, selectedData?: object) => {
     setSelectedData((prev) => ({ ...prev, [name]: selectedData }))
     setModalsData((prev) => {
       const { [name]: _, ...rest } = prev
       return rest
     })
-  }
+  }, [])
 
   const value = useMemo(
     () => ({ modalsData, selectedData, openModal, closeModal }),

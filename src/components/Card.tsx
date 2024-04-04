@@ -4,11 +4,11 @@ import { colors } from '@constants'
 import styled from '@emotion/styled'
 import { HassEntityWithService } from '@hakit/core'
 import { rgba } from 'polished'
-import { useContext, useMemo } from 'react'
+import { memo, useContext, useMemo } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 
 const widthPresets = {
-  '1/3': 123,
+  '1/3': 132.6,
   '1/4': 100,
 }
 
@@ -23,6 +23,7 @@ export type CardProps = {
   fill?: boolean
   transparent?: boolean
   outline?: boolean
+  value?: string | number | React.ReactNode
 } & StackProps
 
 const getWidth = (width?: keyof typeof widthPresets | number) => {
@@ -67,96 +68,89 @@ StyledCard.defaultProps = {
   alignItems: 'center',
 }
 
-export const Card = ({
-  active,
-  onClick,
-  secondClick,
-  children,
-  size,
-  style: incomingStyle,
-  disabled,
-  outline,
-  ...rest
-}: CardProps) => {
-  const { radius, color: contextColor } = useContext(StackContext)
-  const color = rest.color ?? contextColor
+export const Card = memo(
+  ({
+    active,
+    onClick,
+    secondClick,
+    value,
+    size,
+    style: incomingStyle,
+    disabled,
+    outline,
+    children,
+    ...rest
+  }: CardProps) => {
+    const { radius, color: contextColor } = useContext(StackContext)
+    const color = rest.color ?? contextColor
 
-  const handleClick = useMemo(
-    () => (disabled ? undefined : active ? secondClick : onClick),
-    [active, disabled, onClick, secondClick],
-  )
+    const handleClick = useMemo(
+      () => (disabled ? undefined : active ? secondClick : onClick),
+      [active, disabled, onClick, secondClick],
+    )
 
-  const height = useMemo(
-    () => (size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined),
-    [size],
-  )
-  const backgroundColor = useMemo(() => {
-    if (rest.fill && color) {
-      return rgba(color, 0.25)
-    } else {
-      return rest.transparent ? 'transparent' : active ? colors.light : colors.dark
-    }
-  }, [rest.fill, color, rest.transparent, active])
-  const style = useMemo(
-    () => ({
-      ...incomingStyle,
-      flex: size === 'stretch' ? 1 : undefined,
-      minHeight: height,
-      maxHeight: height,
-      backgroundColor,
-      outline: outline && color ? `1px solid ${color}` : 'none',
-      border: !outline && color ? `2px solid ${color}` : 'none',
-    }),
-    [incomingStyle, backgroundColor, size, height, color, outline],
-  )
-
-  return (
-    <ErrorBoundary
-      fallback={
-        <StyledCard disableRadius={radius} color={colors.light}>
-          error
-        </StyledCard>
+    const height = useMemo(
+      () => (size !== 'stretch' ? sizeToHeightMap[size ?? 'md'] : undefined),
+      [size],
+    )
+    const backgroundColor = useMemo(() => {
+      if (rest.fill && color) {
+        return rgba(color, 0.25)
+      } else {
+        return rest.transparent ? 'transparent' : active ? colors.light : colors.dark
       }
-    >
-      <StyledCard
-        onClick={handleClick}
-        disableRadius={radius}
-        color={color}
-        active={active}
-        style={style}
-        disabled={disabled}
-        {...rest}
+    }, [rest.fill, color, rest.transparent, active])
+
+    const style = useMemo(
+      () => ({
+        ...incomingStyle,
+        flex: size === 'stretch' ? 1 : undefined,
+        minHeight: height,
+        maxHeight: height,
+        backgroundColor,
+        outline: outline && color ? `1px solid ${color}` : 'none',
+        border: !outline && color ? `2px solid ${color}` : 'none',
+      }),
+      [incomingStyle, backgroundColor, size, height, color, outline],
+    )
+
+    return (
+      <ErrorBoundary
+        fallback={<StyledCard disableRadius={radius} color={colors.light} value="error" />}
       >
-        {children}
-      </StyledCard>
-    </ErrorBoundary>
-  )
-}
-
-const CardSwitch = ({
-  entity,
-  ...props
-}: CardProps & { entity: HassEntityWithService<'switch'> }) => (
-  <Card
-    onClick={() => {
-      entity.service.toggle()
-    }}
-    color={entity.state === 'on' ? colors.light : undefined}
-    {...props}
-  />
+        <StyledCard
+          onClick={handleClick}
+          disableRadius={radius}
+          color={color}
+          active={active}
+          style={style}
+          disabled={disabled}
+          {...rest}
+        >
+          {value ?? children}
+        </StyledCard>
+      </ErrorBoundary>
+    )
+  },
 )
-Card.Switch = CardSwitch
+Card.displayName = 'Card'
 
-const CardIcon = ({ icon, ...props }: CardProps & { icon: string }) => (
+export const CardSwitch = memo(
+  ({ entity, ...props }: CardProps & { entity: HassEntityWithService<'switch'> }) => (
+    <Card
+      onClick={() => {
+        entity.service.toggle()
+      }}
+      color={entity.state === 'on' ? colors.light : undefined}
+      {...props}
+    />
+  ),
+)
+CardSwitch.displayName = 'CardSwitch'
+
+export const CardIcon = memo(({ icon, ...props }: Omit<CardProps, 'value'> & { icon: string }) => (
   <Card {...props}>
     <Icon name={icon} />
   </Card>
-)
-
-Card.Icon = CardIcon
-
-const CardPadded = styled(Card)`
-  padding: 0 16px;
-`
-
-Card.Padded = CardPadded
+))
+CardIcon.displayName = 'CardIcon'

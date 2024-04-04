@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React from 'react'
+import React, { memo } from 'react'
 import { createContext, CSSProperties, FC, useMemo } from 'react'
 
 export type StackProps = {
@@ -50,9 +50,10 @@ const StyledStack: FC<StackProps> = styled('div', {
     ${({ stretch = true }) => stretch && 'flex: 1; height: 100%'}
   }
 `
+
 export const StackContext = createContext<{ radius: boolean; color?: string }>({ radius: false })
 
-export const Stack = ({ children, radius, color, ...rest }: StackProps) => {
+export const Stack = memo(({ children, radius, color, ...rest }: StackProps) => {
   const context = useMemo(() => ({ radius: radius !== undefined, color }), [radius, color])
   return (
     <StackContext.Provider value={context}>
@@ -61,9 +62,10 @@ export const Stack = ({ children, radius, color, ...rest }: StackProps) => {
       </StyledStack>
     </StackContext.Provider>
   )
-}
+})
+Stack.displayName = 'Stack'
 
-Stack.MobileColumn = styled(Stack)`
+export const MobileColumn = styled(Stack)`
   min-width: 414px;
   max-width: 414px;
   min-height: 540px;
@@ -73,17 +75,16 @@ Stack.MobileColumn = styled(Stack)`
   }
 `
 
-Stack.MobileColumn.defaultProps = {
+MobileColumn.defaultProps = {
   column: true,
   align: 'flex-start',
   gap: 8,
 }
 
-const StackOutlined = ({ style, ...props }: StackProps) => (
+export const StackOutlined = ({ style, ...props }: StackProps) => (
   <Stack
     radius
     style={{ border: `2px solid ${props.color}`, boxSizing: 'border-box', gap: 0, ...style }}
     {...props}
   />
 )
-Stack.Outlined = StackOutlined

@@ -31,19 +31,19 @@ export const Light = () => {
 
   return (
     <Stack radius>
-      <Card width="1/3">Office</Card>
-      <Card onClick={off} active={!on}>
-        Off
-      </Card>
-      <Card onClick={dim} active={on && hue_office_adaptive.bool && hue_office_sleep.bool}>
-        Dim
-      </Card>
-      <Card onClick={auto} active={on && hue_office_adaptive.bool && !hue_office_sleep.bool}>
-        Auto
-      </Card>
-      <Card onClick={bright} active={on && !hue_office_adaptive.bool}>
-        Bright
-      </Card>
+      <Card width="1/3" value="Office" />
+      <Card onClick={off} active={!on} value="Off" />
+      <Card
+        onClick={dim}
+        active={on && hue_office_adaptive.bool && hue_office_sleep.bool}
+        value="Dim"
+      />
+      <Card
+        onClick={auto}
+        active={on && hue_office_adaptive.bool && !hue_office_sleep.bool}
+        value="Auto"
+      />
+      <Card onClick={bright} active={on && !hue_office_adaptive.bool} value="Bright" />
     </Stack>
   )
 }

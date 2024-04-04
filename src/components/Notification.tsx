@@ -10,7 +10,7 @@ type NotificationProps = {
 }
 
 export const Notification = ({ onClick, name, description, color }: NotificationProps) => (
-  <Card.Padded onClick={onClick} color={color}>
+  <Card onClick={onClick} color={color} style={{ padding: '0 16px' }}>
     <div>
       <Txt size="lg">{name}</Txt>
       <Txt opacity="low" style={{ marginLeft: 4 }}>
@@ -19,5 +19,5 @@ export const Notification = ({ onClick, name, description, color }: Notification
       </Txt>
     </div>
     {onclick && <Icon name="check-2" />}
-  </Card.Padded>
+  </Card>
 )

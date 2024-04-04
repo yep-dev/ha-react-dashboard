@@ -20,8 +20,6 @@ export const Project = ({ name, color, size = 'stretch', ...props }: Props) => {
   }
 
   return (
-    <Card color={color} size={size} onClick={handleClick} fill outline {...props}>
-      {name}
-    </Card>
+    <Card color={color} size={size} onClick={handleClick} fill outline {...props} value={name} />
   )
 }

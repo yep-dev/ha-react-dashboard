@@ -37,9 +37,12 @@ export const Portainer = () => {
   return (
     <>
       {data?.map((item) => (
-        <Card.Padded key={item.content} align="flex-start">
-          {item.content}
-        </Card.Padded>
+        <Card
+          key={item.content}
+          align="flex-start"
+          style={{ padding: '0 16px' }}
+          value={item.content}
+        />
       ))}
     </>
   )

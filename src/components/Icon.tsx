@@ -1,4 +1,5 @@
 import { css } from '@emotion/react'
+import { memo } from 'react'
 
 type IconProps = {
   name: string
@@ -10,8 +11,8 @@ const iconStyles = (size: number) => css`
   height: ${size}px;
 `
 
-export const Icon = ({ name, size = 24, ...props }: IconProps) => {
+export const Icon = memo(({ name, size = 24, ...props }: IconProps) => {
   return (
     <img css={iconStyles(size)} src={`/local/dashboard/icons/${name}.svg`} alt={name} {...props} />
   )
-}
+})

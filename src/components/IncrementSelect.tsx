@@ -1,4 +1,4 @@
-import { Card } from '@components'
+import { Card, CardIcon } from '@components'
 import { useCallback, useRef, useState } from 'react'
 
 type IncrementSelectProps = {
@@ -40,30 +40,33 @@ export const IncrementSelect = ({
     [onChange, options],
   )
 
+  const increment = useCallback(() => {
+    handleTouchStart('increment')
+  }, [handleTouchStart])
+  const decrement = useCallback(() => {
+    handleTouchStart('decrement')
+  }, [handleTouchStart])
+
   const handleTouchEnd = useCallback(() => {
     clearTimeout(longPressTimer.current)
   }, [])
 
   return (
     <>
-      <Card.Icon
+      <CardIcon
         icon="subtract"
         width={45}
-        onTouchStart={() => {
-          handleTouchStart('decrement')
-        }}
+        onTouchStart={decrement}
         onTouchEnd={handleTouchEnd}
         onClick={() => {
           handleValueChange(-1)
         }}
       />
       <Card width={74}>{children}</Card>
-      <Card.Icon
+      <CardIcon
         icon="add"
         width={45}
-        onTouchStart={() => {
-          handleTouchStart('increment')
-        }}
+        onTouchStart={increment}
         onTouchEnd={handleTouchEnd}
         onClick={() => {
           handleValueChange(1)

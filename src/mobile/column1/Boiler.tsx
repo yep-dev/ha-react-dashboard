@@ -29,13 +29,10 @@ export const Boiler = () => {
           onClick={() => {
             dhwActivated.service.toggle()
           }}
-        >
-          {dhwTemp}°C
-        </Card>
+          value={`${dhwTemp}°C`}
+        />
         <Stack radius>
-          <Card align="space-around" radius={0}>
-            <span>Office</span>
-          </Card>
+          <Card align="space-around" radius={0} value="office" />
           <IncrementSelect
             options={steps}
             initialValue={officeTemperature}
@@ -47,9 +44,7 @@ export const Boiler = () => {
       </Stack>
 
       <Stack radius>
-        <Card>
-          {current.state}°C / {selected.state}°C ({target.state}°C)
-        </Card>
+        <Card value={`${current.state}°C / ${selected.state}°C (${target.state}°C)`} />
         <IncrementSelect options={steps} initialValue={offset} onChange={handleOffsetChange}>
           {offset !== 0 && '+'}
           {offset === 20 ? 'MAX' : offset}

@@ -18,9 +18,8 @@ export const CurrentProject = () => {
         style={{ borderWidth: 3 }}
         onClick={project === 'sleepy' ? undefined : open}
         fill
-      >
-        {task || project}
-      </Card>
+        value={task || project}
+      />
     </>
   )
 }

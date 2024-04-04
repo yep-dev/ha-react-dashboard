@@ -42,9 +42,8 @@ export const AirConditioner = () => {
               }}
               key={temperature}
               active={ac.attributes.temperature === temperature}
-            >
-              {temperature}
-            </Card>
+              value={temperature}
+            />
           ))}
         </Stack>
         <Stack radius>
@@ -53,9 +52,8 @@ export const AirConditioner = () => {
               setPresetMode('quiet')
             }}
             active={ac.state !== 'off' && ac.attributes.preset_mode === 'quiet'}
-          >
-            Quiet
-          </Card>
+            value="Quiet"
+          />
           <Card
             onClick={() => {
               setPresetMode('off')
@@ -66,9 +64,8 @@ export const AirConditioner = () => {
               ac.attributes.preset_mode === 'off' &&
               ac.attributes.fan_mode === 'low'
             }
-          >
-            Low
-          </Card>
+            value="Low"
+          />
           <Card
             onClick={() => {
               setPresetMode('off')
@@ -79,17 +76,15 @@ export const AirConditioner = () => {
               ac.attributes.preset_mode === 'off' &&
               ac.attributes.fan_mode === 'auto'
             }
-          >
-            Auto
-          </Card>
+            value="Auto"
+          />
           <Card
             onClick={() => {
               setPresetMode('speed')
             }}
             active={ac.state !== 'off' && ac.attributes.preset_mode === 'speed'}
-          >
-            Turbo
-          </Card>
+            value="Turbo"
+          />
         </Stack>
       </Stack>
     </Stack>

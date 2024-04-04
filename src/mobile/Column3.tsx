@@ -1,9 +1,9 @@
-import { Stack } from '@components'
+import { MobileColumn } from '@components'
 import styled from '@emotion/styled'
 import { useEntity } from '@hakit/core'
 import { CurrentProject, CurrentProjectTimer, DmnPicker, SleepTimer } from '@mobile'
 
-const Column = styled(Stack.MobileColumn)`
+const Column = styled(MobileColumn)`
   min-height: 514px;
   width: 100%;
 `

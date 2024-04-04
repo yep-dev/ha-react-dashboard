@@ -1,4 +1,4 @@
-import { Card, Stack, Txt } from '@components'
+import { CardIcon, Stack, Txt } from '@components'
 import { CardProgress } from '@components/CardProgress.tsx'
 import { colors } from '@constants.ts'
 import { estimate } from '@data'
@@ -103,7 +103,7 @@ export const CurrentProjectTimer = () => {
           {process.env.NODE_ENV === 'development' && ` (${timePassedSeconds}/${durationSeconds})`}
         </Txt>
       </CardProgress>
-      <Card.Icon
+      <CardIcon
         icon="time-stopwatch"
         size="xl"
         width={100}

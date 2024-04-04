@@ -1,4 +1,4 @@
-import { Card, Stack } from '@components'
+import { CardIcon, CardProgress, Stack } from '@components'
 import { useEntity } from '@hakit/core'
 import { useModal } from '@modals'
 import { formatMinutes } from '@utils'
@@ -19,7 +19,7 @@ export const SleepTimer = () => {
 
   return (
     <Stack radius>
-      <Card
+      <CardProgress
         size="xl"
         align="space-around"
         onClick={() => {
@@ -30,8 +30,8 @@ export const SleepTimer = () => {
         progress={timePassed / duration}
       >
         {formatMinutes(timePassed)} / {formatMinutes(duration)}
-      </Card>
-      <Card.Icon icon="time-stopwatch" size="xl" width={100} onClick={open} />
+      </CardProgress>
+      <CardIcon icon="time-stopwatch" size="xl" width={100} onClick={open} />
     </Stack>
   )
 }

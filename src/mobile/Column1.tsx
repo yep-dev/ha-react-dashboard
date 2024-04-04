@@ -1,9 +1,9 @@
-import { Stack } from '@components'
+import { MobileColumn } from '@components'
 import { AirConditioner, Battery, Boiler, DateTime, Energy, Sensors, TimeBlock } from '@mobile'
 
 export const Column1 = () => {
   return (
-    <Stack.MobileColumn>
+    <MobileColumn>
       <DateTime />
       <TimeBlock />
       <AirConditioner />
@@ -11,6 +11,6 @@ export const Column1 = () => {
       <Battery />
       <Sensors />
       <Energy />
-    </Stack.MobileColumn>
+    </MobileColumn>
   )
 }

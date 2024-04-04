@@ -1,5 +1,6 @@
 import { Card, CardProps, Icon, Stack } from '@components'
 import { colors } from '@constants'
+import { memo } from 'react'
 
 type Props = {
   children?: React.ReactNode
@@ -37,28 +38,21 @@ const getColor = (
   return undefined
 }
 
-export const InfoCard = ({
-  children,
-  icon,
-  suffix,
-  value,
-  green,
-  orange,
-  red,
-  invert,
-  align,
-  width,
-}: Props) => {
-  const color = getColor(value, green, orange, red, invert)
+export const InfoCard = memo(
+  ({ children, icon, suffix, value, green, orange, red, invert, align, width }: Props) => {
+    const color = getColor(value, green, orange, red, invert)
 
-  return (
-    <Card gap={0} color={color} alignItems="center" align="center" size="sm" width={width}>
-      {icon && <Icon name={icon} style={{ marginLeft: 4 }} />}
-      <Stack align={align}>
-        {/*{children && <div style={{ textAlign: 'left', marginLeft: 8 }}>{children}</div>}*/}
-        {children ?? value}
-        {suffix}
-      </Stack>
-    </Card>
-  )
-}
+    return (
+      <Card gap={0} color={color} alignItems="center" align="center" size="sm" width={width}>
+        {icon && <Icon name={icon} style={{ marginLeft: 4 }} />}
+        <Stack align={align}>
+          {/*{children && <div style={{ textAlign: 'left', marginLeft: 8 }}>{children}</div>}*/}
+          {children ?? value}
+          {suffix}
+        </Stack>
+      </Card>
+    )
+  },
+)
+
+InfoCard.displayName = 'InfoCard'

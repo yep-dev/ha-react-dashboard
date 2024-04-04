@@ -1,6 +1,6 @@
-import { Card, Stack } from '@components'
-import { useEntity } from '@hakit/core'
+import { Card, CardIcon, Stack } from '@components'
 import styled from '@emotion/styled'
+import { useEntity } from '@hakit/core'
 
 const Title = styled.div`
   direction: ltr;
@@ -12,7 +12,6 @@ const Title = styled.div`
 
 export const Player = () => {
   const player = useEntity('media_player.desk')
-  // hakit – fix type assigned
 
   const playRadio = () => {
     player.service.playMedia({
@@ -31,7 +30,7 @@ export const Player = () => {
         )}
       </Card>
       <Stack radius={0}>
-        <Card.Icon
+        <CardIcon
           icon={player.state === 'playing' ? 'controls-pause' : 'controls-play'}
           onClick={() => {
             if (player.state === 'idle') {
@@ -39,34 +38,34 @@ export const Player = () => {
             } else player.service.mediaPlayPause()
           }}
         />
-        <Card.Icon
+        <CardIcon
           icon="controls-previous"
           onClick={() => {
             player.service.mediaSeek({ seek_position: 0.0001 })
           }}
         />
-        <Card.Icon
+        <CardIcon
           icon="controls-next"
           onClick={() => {
             if (player.attributes.repeat === 'one') player.service.repeatSet({ repeat: 'off' })
             player.service.mediaNextTrack()
           }}
         />
-        <Card.Icon
+        <CardIcon
           icon="volume-control-low"
           active={player.attributes.volume_level === 0.25}
           onClick={() => {
             player.service.volumeSet({ volume_level: 0.25 })
           }}
         />
-        <Card.Icon
+        <CardIcon
           icon="volume-control-medium"
           active={player.attributes.volume_level === 0.55}
           onClick={() => {
             player.service.volumeSet({ volume_level: 0.55 })
           }}
         />
-        <Card.Icon
+        <CardIcon
           icon="volume-control-full"
           active={player.attributes.volume_level === 0.67}
           onClick={() => {
@@ -75,12 +74,12 @@ export const Player = () => {
         />
       </Stack>
       <Stack radius={0}>
-        <Card.Icon
+        <CardIcon
           icon="radio-antenna-1"
           active={player.attributes.media_content_id === 'radioparadise://4.flac'}
           onClick={playRadio}
         />
-        <Card.Icon
+        <CardIcon
           icon="synchronize-arrow-1"
           active={player.attributes.repeat === 'one'}
           onClick={() => {
@@ -90,9 +89,9 @@ export const Player = () => {
             player.service.repeatSet({ repeat: 'off' })
           }}
         />
-        <Card.Icon icon="audio-file-search" disabled />
-        <Card.Icon icon="playlist-repeat" disabled />
-        <Card.Icon icon="audio-book-volume-high" disabled />
+        <CardIcon icon="audio-file-search" disabled />
+        <CardIcon icon="playlist-repeat" disabled />
+        <CardIcon icon="audio-book-volume-high" disabled />
       </Stack>
     </Stack>
   )
